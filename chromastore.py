@@ -35,7 +35,7 @@ class ChromaStore:
             documents=text
             )
             i=i+1
-        
+        print("done")
         return None
 
     def query_documents(self, query_text: str, user_id: str):
