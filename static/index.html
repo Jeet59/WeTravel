@@ -3,55 +3,77 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mumbot Chat</title>
+    <title>WeTravel Mumbai</title>
     <style>
       body {
-        font-family: Arial, sans-serif;
+        font-family: "Arial", sans-serif;
         margin: 0;
-        padding: 20px;
-        background-image: url("path_to_your_image.jpg"); /* Add your background image */
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-image: url("/static/bgmumbai.webp");
         background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
         color: white;
       }
+
       #chat-container {
-        border: 1px solid #ccc;
-        border-radius: 10px;
-        padding: 20px;
-        max-width: 600px;
-        margin: auto;
-        background-color: rgba(0, 0, 0, 0.7);
+        border-radius: 15px;
+        width: 400px;
+        background-color: rgba(0, 0, 0, 0.75);
+        padding: 30px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
       }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 15px;
+      }
+
       #messages {
-        height: 400px;
+        height: 300px;
         overflow-y: auto;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
         padding: 10px;
-        border: 1px solid #aaa;
-        border-radius: 5px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
         background-color: rgba(255, 255, 255, 0.1);
       }
+
       #user-input {
         display: flex;
+        gap: 10px;
       }
+
       #input-message {
         flex: 1;
         padding: 10px;
-        border-radius: 5px;
+        border-radius: 10px;
         border: 1px solid #aaa;
+        outline: none;
       }
+
       #send-button {
-        padding: 10px;
-        border-radius: 5px;
+        padding: 10px 15px;
+        border-radius: 10px;
         border: none;
         background-color: #28a745;
         color: white;
         cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      #send-button:hover {
+        background-color: #218838;
       }
     </style>
   </head>
   <body>
     <div id="chat-container">
-      <h2>Mumbai Chat</h2>
+      <h2>WeTravel Mumbai</h2>
       <div id="messages"></div>
       <div id="user-input">
         <input
@@ -69,12 +91,10 @@
         const message = messageInput.value;
         if (!message) return;
 
-        // Display user message
         displayMessage(`You: ${message}`);
         messageInput.value = "";
 
         try {
-          // Send the user message to the backend
           const response = await fetch("/chat", {
             method: "POST",
             headers: {
@@ -83,12 +103,9 @@
             body: JSON.stringify({ message }),
           });
 
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
+          if (!response.ok) throw new Error("Network response was not ok");
 
           const data = await response.json();
-          // Display bot response
           displayMessage(`Bot: ${data}`);
         } catch (error) {
           console.error("Error:", error);
@@ -101,7 +118,7 @@
         const messageElement = document.createElement("div");
         messageElement.textContent = message;
         messagesContainer.appendChild(messageElement);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight; // Scroll to the bottom
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
       }
     </script>
   </body>
