@@ -1,0 +1,47 @@
+/* Mobile menu button styles */
+.sidebar-toggle {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  width: 40px;
+  height: 40px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1001;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.sidebar-toggle:hover {
+  background-color: #218838;
+}
+
+/* Icon swap - hide bars when active */
+.sidebar-toggle.active .fa-bars {
+  display: none;
+}
+
+/* Add X icon when active */
+.sidebar-toggle.active::before {
+  content: "\f00d";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+}
+
+/* Show the toggle button only on smaller screens */
+@media (max-width: 576px) {
+  .sidebar-toggle {
+    display: flex;
+  }
+  
+  /* Add padding to user profile section on mobile */
+  .sidebar .user-profile {
+    padding-top: 60px; /* Add extra padding at top to avoid overlap with button */
+  }
+} 

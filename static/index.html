@@ -4,466 +4,61 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WeTravel Mumbai</title>
-    <style>
-      /* Global Styles */
-      body {
-        font-family: "Arial", sans-serif;
-        margin: 0;
-        padding: 0;
-        height: 100vh;
-        background-image: url("/static/bgmumbai.webp");
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-        color: white;
-      }
-
-      /* Dashboard Layout */
-      .dashboard {
-        display: flex;
-        height: 100%;
-      }
-
-      /* Sidebar */
-      .sidebar {
-        width: 250px;
-        background-color: rgba(0, 0, 0, 0.85);
-        padding: 20px;
-        box-shadow: 4px 0 8px rgba(0, 0, 0, 0.5);
-        display: flex;
-        flex-direction: column;
-      }
-
-      .sidebar h2 {
-        text-align: center;
-        margin-bottom: 30px;
-        font-size: 24px;
-        color: #28a745;
-      }
-
-      .sidebar ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-      }
-
-      .sidebar ul li {
-        margin: 15px 0;
-      }
-
-      .sidebar ul li a {
-        color: white;
-        text-decoration: none;
-        font-size: 16px;
-        display: block;
-        padding: 12px;
-        border-radius: 8px;
-        transition: all 0.3s ease;
-        background-color: rgba(255, 255, 255, 0.05);
-      }
-
-      .sidebar ul li a:hover {
-        background-color: rgba(255, 255, 255, 0.1);
-        transform: translateX(5px);
-      }
-
-      .sidebar ul li a.active {
-        background-color: #28a745;
-        color: white;
-        font-weight: bold;
-      }
-
-      /* Main Content */
-      .main-content {
-        flex: 1;
-        padding: 30px;
-        background-color: rgba(0, 0, 0, 0.7);
-        overflow-y: auto;
-      }
-
-      .tab-content {
-        display: none;
-        animation: fadeIn 0.5s ease;
-      }
-
-      .tab-content.active {
-        display: block;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
-      }
-
-      /* Home Tab */
-      #home h2 {
-        font-size: 28px;
-        color: #28a745;
-        margin-bottom: 20px;
-      }
-
-      #home p {
-        font-size: 18px;
-        line-height: 1.6;
-        color: rgba(255, 255, 255, 0.9);
-      }
-
-      /* Subplaces Tab */
-      #subplaces h2 {
-        font-size: 28px;
-        color: #28a745;
-        margin-bottom: 20px;
-      }
-
-      #subplace-dropdown {
-        width: 100%;
-        max-width: 300px;
-        padding: 10px;
-        border-radius: 8px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        background-color: white;
-        color: black;
-        font-size: 16px;
-        outline: none;
-        transition: border-color 0.3s ease;
-      }
-
-      #subplace-dropdown:hover {
-        border-color: #28a745;
-      }
-
-      /* Location Tab */
-      #location h2 {
-        font-size: 28px;
-        color: #28a745;
-        margin-bottom: 20px;
-      }
-
-      .map-placeholder {
-        width: 100%;
-        height: 400px;
-        background-color: rgba(255, 255, 255, 0.1);
-        border-radius: 15px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 20px;
-        color: rgba(255, 255, 255, 0.5);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-      }
-
-      /* Chat Tab */
-      .chat-container {
-        border-radius: 15px;
-        width: 100%;
-        max-width: 600px;
-        background-color: rgba(0, 0, 0, 0.85);
-        padding: 30px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-        margin: 0 auto;
-      }
-
-      .chat-container h2 {
-        text-align: center;
-        margin-bottom: 20px;
-        font-size: 24px;
-        color: #28a745;
-      }
-
-      #messages {
-        height: 300px;
-        overflow-y: auto;
-        margin-bottom: 20px;
-        padding: 10px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 10px;
-        background-color: rgba(255, 255, 255, 0.1);
-      }
-
-      .message {
-        margin: 10px 0;
-        padding: 10px;
-        border-radius: 8px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        background-color: rgba(0, 0, 0, 0.3);
-        color: white;
-        max-width: 80%;
-      }
-
-      .user-message {
-        align-self: flex-end;
-        background-color: rgba(40, 167, 69, 0.8);
-      }
-
-      .bot-message {
-        align-self: flex-start;
-        background-color: rgba(255, 255, 255, 0.1);
-      }
-
-      #user-input {
-        display: flex;
-        gap: 10px;
-      }
-
-      #input-message {
-        flex: 1;
-        padding: 10px;
-        border-radius: 10px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        background-color: rgba(255, 255, 255, 0.1);
-        color: white;
-        outline: none;
-        transition: border-color 0.3s ease;
-      }
-
-      #input-message:focus {
-        border-color: #28a745;
-      }
-
-      #send-button {
-        padding: 10px 20px;
-        border-radius: 10px;
-        border: none;
-        background-color: #28a745;
-        color: white;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-      }
-
-      #send-button:hover {
-        background-color: #218838;
-      }
-
-      .subplace-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 20px;
-        margin-top: 30px;
-      }
-
-      .subplace-card {
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 15px;
-        padding: 20px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        position: relative;
-        overflow: hidden;
-      }
-
-      .subplace-card:hover {
-        transform: translateY(-5px);
-        background: rgba(40, 167, 69, 0.2);
-        border-color: #28a745;
-      }
-
-      .subplace-card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(45deg, transparent, rgba(40, 167, 69, 0.1));
-        z-index: 0;
-      }
-
-      .subplace-card h3 {
-        color: #28a745;
-        margin: 0 0 10px 0;
-        position: relative;
-        z-index: 1;
-      }
-
-      .subplace-card p {
-        color: rgba(255, 255, 255, 0.8);
-        font-size: 14px;
-        line-height: 1.5;
-        position: relative;
-        z-index: 1;
-      }
-
-      .subplace-content {
-        display: none;
-        padding: 20px;
-        background: rgba(0, 0, 0, 0.5);
-        border-radius: 15px;
-        margin-top: 20px;
-        animation: fadeIn 0.3s ease;
-      }
-
-      .subplace-content.active {
-        display: block;
-      }
-
-      .subplace-content img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-        border-radius: 10px;
-        margin-bottom: 15px;
-      }
-
-      .dashboard-header {
-        text-align: center;
-        margin-bottom: 40px;
-      }
-
-      .dashboard-header h2 {
-        font-size: 32px;
-        color: #28a745;
-        margin-bottom: 10px;
-      }
-
-      .dashboard-subtitle {
-        font-size: 18px;
-        color: rgba(255, 255, 255, 0.9);
-        margin: 0;
-      }
-
-      .metrics-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 25px;
-        margin: 30px 0;
-      }
-
-      .metric-card {
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 15px;
-        padding: 25px;
-        display: flex;
-        align-items: center;
-        transition: transform 0.3s ease;
-      }
-
-      .metric-card:hover {
-        transform: translateY(-5px);
-        background: rgba(40, 167, 69, 0.1);
-      }
-
-      .metric-icon {
-        font-size: 32px;
-        margin-right: 20px;
-      }
-
-      .metric-value {
-        font-size: 28px;
-        color: #28a745;
-        margin: 10px 0;
-      }
-
-      .metric-label {
-        color: rgba(255, 255, 255, 0.8);
-        font-size: 14px;
-        margin: 0;
-      }
-
-      .dashboard-section {
-        margin: 40px 0;
-        padding: 25px;
-        background: rgba(0, 0, 0, 0.3);
-        border-radius: 15px;
-      }
-
-      .dashboard-section h3 {
-        color: #28a745;
-        margin-bottom: 25px;
-        font-size: 24px;
-      }
-
-      .feature-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 25px;
-      }
-
-      .feature-card {
-        padding: 20px;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 12px;
-        text-align: center;
-        transition: all 0.3s ease;
-      }
-
-      .feature-card:hover {
-        background: rgba(40, 167, 69, 0.1);
-        transform: translateY(-3px);
-      }
-
-      .feature-icon {
-        font-size: 40px;
-        margin-bottom: 15px;
-      }
-
-      .feature-card h4 {
-        color: #28a745;
-        margin: 15px 0;
-      }
-
-      .feature-card p {
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.8);
-        line-height: 1.5;
-      }
-
-      .update-list {
-        display: grid;
-        gap: 15px;
-      }
-
-      .update-item {
-        padding: 15px;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-      }
-
-      .update-badge {
-        background: #28a745;
-        padding: 4px 12px;
-        border-radius: 20px;
-        font-size: 12px;
-        margin-right: 15px;
-        font-weight: bold;
-      }
-    </style>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places&v=beta"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="/static/css/mobile-menu.css">
   </head>
   <body>
+    <div class="sidebar-overlay"></div>
+    <button id="sidebar-toggle" class="sidebar-toggle" aria-label="Toggle navigation">
+      <i class="fas fa-bars"></i>
+    </button>
+    
     <div class="dashboard">
       <!-- Sidebar -->
-      <div class="sidebar">
+      <div class="sidebar" id="sidebar">
+        <div class="user-profile">
+          <div class="avatar">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="user-info">
+            <h3 id="user-name">User</h3>
+            <p id="user-email">user@example.com</p>
+          </div>
+        </div>
         <h2>WeTravel Mumbai</h2>
         <ul>
           <li>
-            <a href="#home" class="tab-link active" data-tab="home">Home</a>
+            <a href="#home" class="tab-link active" data-tab="home"><i class="fas fa-home"></i> Home</a>
           </li>
           <li>
-            <a href="#subplaces" class="tab-link" data-tab="subplaces"
-              >Subplaces in Mumbai</a
-            >
+            <a href="#subplaces" class="tab-link" data-tab="subplaces"><i class="fas fa-map-marker-alt"></i> Subplaces in Mumbai</a>
           </li>
           <li>
-            <a href="#location" class="tab-link" data-tab="location"
-              >Explore by Location</a
-            >
+            <a href="#location" class="tab-link" data-tab="location"><i class="fas fa-map"></i> Explore by Location</a>
           </li>
           <li>
-            <a href="#chat" class="tab-link" data-tab="chat">Direct Chat</a>
+            <a href="#chat" class="tab-link" data-tab="chat"><i class="fas fa-comments"></i> Direct Chat</a>
           </li>
         </ul>
+        <div class="sidebar-footer">
+          <button id="logout-button" class="logout-btn">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </button>
+        </div>
       </div>
 
       <!-- Main Content -->
       <div class="main-content">
         <!-- Home Tab -->
-        <!-- Update the Home Tab section with this code -->
         <div id="home" class="tab-content active">
           <div class="dashboard-header">
             <h2>Welcome to WeTravel Mumbai</h2>
@@ -474,7 +69,7 @@
 
           <div class="metrics-container">
             <div class="metric-card">
-              <div class="metric-icon">📍</div>
+              <div class="metric-icon"><i class="fas fa-map-pin"></i></div>
               <div class="metric-content">
                 <h3>Places Covered</h3>
                 <p class="metric-value">150+</p>
@@ -483,7 +78,7 @@
             </div>
 
             <div class="metric-card">
-              <div class="metric-icon">💬</div>
+              <div class="metric-icon"><i class="fas fa-comment-dots"></i></div>
               <div class="metric-content">
                 <h3>Daily Queries</h3>
                 <p class="metric-value">1.2k</p>
@@ -492,7 +87,7 @@
             </div>
 
             <div class="metric-card">
-              <div class="metric-icon">📊</div>
+              <div class="metric-icon"><i class="fas fa-chart-pie"></i></div>
               <div class="metric-content">
                 <h3>Data Accuracy</h3>
                 <p class="metric-value">98%</p>
@@ -505,7 +100,7 @@
             <h3>System Overview</h3>
             <div class="feature-grid">
               <div class="feature-card">
-                <div class="feature-icon">🤖</div>
+                <div class="feature-icon"><i class="fas fa-robot"></i></div>
                 <h4>AI-Powered Chat</h4>
                 <p>
                   Natural language processing with retrieval-augmented
@@ -514,7 +109,7 @@
               </div>
 
               <div class="feature-card">
-                <div class="feature-icon">🗺️</div>
+                <div class="feature-icon"><i class="fas fa-map-marked-alt"></i></div>
                 <h4>Smart Mapping</h4>
                 <p>
                   Integrated location services with contextual place information
@@ -522,7 +117,7 @@
               </div>
 
               <div class="feature-card">
-                <div class="feature-icon">📚</div>
+                <div class="feature-icon"><i class="fas fa-book-open"></i></div>
                 <h4>Knowledge Base</h4>
                 <p>
                   Curated database of historical, cultural, and practical
@@ -531,7 +126,7 @@
               </div>
 
               <div class="feature-card">
-                <div class="feature-icon">⚡</div>
+                <div class="feature-icon"><i class="fas fa-bolt"></i></div>
                 <h4>Real-time Updates</h4>
                 <p>
                   Dynamic information including events, traffic, and weather
@@ -561,73 +156,310 @@
 
         <!-- Subplaces Tab -->
         <div id="subplaces" class="tab-content">
-          <h2>Explore Mumbai's Neighborhoods</h2>
-          <div class="subplace-grid">
-            <div class="subplace-card" data-subplace="colaba">
-              <h3>Colaba</h3>
-              <p>
-                Historic district with iconic landmarks and vibrant street life
-              </p>
+          <div class="location-header">
+            <h2>Explore Mumbai's Neighborhoods</h2>
+            <p>Select a location to discover its attractions, cuisine, and culture</p>
+          </div>
+          
+          <!-- Location Tabs Navigation -->
+          <div class="location-tabs">
+            <div class="location-tab active" data-location="colaba">
+              <i class="fas fa-landmark"></i>
+              <span>Colaba</span>
             </div>
-
-            <div class="subplace-card" data-subplace="bandra">
-              <h3>Bandra</h3>
-              <p>Trendy suburb known for its cafes and colonial architecture</p>
+            <div class="location-tab" data-location="bandra">
+              <i class="fas fa-store"></i>
+              <span>Bandra</span>
             </div>
-
-            <div class="subplace-card" data-subplace="juhu">
-              <h3>Juhu</h3>
-              <p>Famous beach destination with local street food delights</p>
+            <div class="location-tab" data-location="juhu">
+              <i class="fas fa-umbrella-beach"></i>
+              <span>Juhu</span>
             </div>
-
-            <div class="subplace-card" data-subplace="andheri">
-              <h3>Andheri</h3>
-              <p>Commercial hub with shopping complexes and nightlife</p>
+            <div class="location-tab" data-location="andheri">
+              <i class="fas fa-shopping-bag"></i>
+              <span>Andheri</span>
             </div>
           </div>
-
-          <!-- Subplace Content Sections -->
-          <div id="colaba-content" class="subplace-content">
-            <img src="placeholder-colaba.jpg" alt="Colaba" />
-            <h3>Explore Colaba</h3>
-            <p>
-              Discover the Gateway of India, Taj Mahal Palace Hotel, and the
-              bustling Colaba Causeway market.
-            </p>
-          </div>
-
-          <div id="bandra-content" class="subplace-content">
-            <img src="placeholder-bandra.jpg" alt="Bandra" />
-            <h3>Discover Bandra</h3>
-            <p>
-              Explore Bandstand Promenade, historic churches, and the famous
-              Linking Road shopping district.
-            </p>
-          </div>
-
-          <div id="juhu-content" class="subplace-content">
-            <img src="placeholder-juhu.jpg" alt="Juhu" />
-            <h3>Enjoy Juhu</h3>
-            <p>
-              Relax on Juhu Beach and sample Mumbai's famous street food like
-              pani puri and pav bhaji.
-            </p>
-          </div>
-
-          <div id="andheri-content" class="subplace-content">
-            <img src="placeholder-andheri.jpg" alt="Andheri" />
-            <h3>Experience Andheri</h3>
-            <p>
-              Visit bustling malls, entertainment centers, and the thriving
-              nightlife scene.
-            </p>
+          
+          <!-- Location Content Sections -->
+          <div class="location-content-container">
+            <!-- Colaba Content -->
+            <div class="location-content active" id="colaba-content">
+              <div class="location-banner">
+                <img src="/static/img/colaba.jpg" alt="Colaba">
+                <div class="location-banner-overlay">
+                  <h2>Colaba</h2>
+                  <p>South Mumbai's historic district with iconic landmarks</p>
+                </div>
+              </div>
+              
+              <div class="location-details">
+                <div class="location-section">
+                  <h3><i class="fas fa-info-circle"></i> About</h3>
+                  <p>Colaba is a vibrant neighborhood in South Mumbai known for its iconic landmarks like the Gateway of India and the Taj Mahal Palace Hotel. This historic district features colonial-era architecture, bustling markets, and a vibrant street life.</p>
+                </div>
+                
+                <div class="location-section">
+                  <h3><i class="fas fa-utensils"></i> Where to Eat</h3>
+                  <div class="recommendation-cards">
+                    <div class="recommendation-card">
+                      <h4>Leopold Cafe</h4>
+                      <p>Iconic cafe with a history dating back to 1871, serving continental, Chinese and Indian cuisines.</p>
+                    </div>
+                    <div class="recommendation-card">
+                      <h4>Bademiya</h4>
+                      <p>Famous street food joint known for delicious kebabs and rolls.</p>
+                    </div>
+                    <div class="recommendation-card">
+                      <h4>Cafe Mondegar</h4>
+                      <p>Popular cafe with Mario Miranda artwork, serving beer and international cuisine.</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="location-section">
+                  <h3><i class="fas fa-camera"></i> What to See</h3>
+                  <div class="recommendation-cards">
+                    <div class="recommendation-card">
+                      <h4>Gateway of India</h4>
+                      <p>Historic monument built during the British Raj, overlooking the Arabian Sea.</p>
+                    </div>
+                    <div class="recommendation-card">
+                      <h4>Taj Mahal Palace</h4>
+                      <p>Iconic 5-star luxury hotel with stunning architecture and history.</p>
+                    </div>
+                    <div class="recommendation-card">
+                      <h4>Colaba Causeway</h4>
+                      <p>Bustling market street with shops selling clothing, jewelry, and souvenirs.</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="location-section">
+                  <h3><i class="fas fa-map-pin"></i> Local Tips</h3>
+                  <ul class="tips-list">
+                    <li>Visit the Gateway of India early in the morning to avoid crowds</li>
+                    <li>Bargain at the street shops on Colaba Causeway</li>
+                    <li>Try the street food but be selective about where you eat</li>
+                    <li>Take a ferry from the Gateway to visit Elephanta Caves</li>
+                    <li>Visit the nearby Kala Ghoda art district for galleries and cafes</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Bandra Content -->
+            <div class="location-content" id="bandra-content">
+              <div class="location-banner">
+                <img src="/static/img/bandra.jpg" alt="Bandra">
+                <div class="location-banner-overlay">
+                  <h2>Bandra</h2>
+                  <p>The "Queen of Suburbs" with stylish cafes and vibrant culture</p>
+                </div>
+              </div>
+              
+              <div class="location-details">
+                <div class="location-section">
+                  <h3><i class="fas fa-info-circle"></i> About</h3>
+                  <p>Bandra is an upscale coastal suburb known as the "Queen of Suburbs." This trendy neighborhood is home to Bollywood celebrities, heritage bungalows, stylish boutiques, and some of Mumbai's best restaurants and nightlife venues.</p>
+                </div>
+                
+                <div class="location-section">
+                  <h3><i class="fas fa-utensils"></i> Where to Eat</h3>
+                  <div class="recommendation-cards">
+                    <div class="recommendation-card">
+                      <h4>Pali Village Cafe</h4>
+                      <p>Rustic European-style cafe with great ambiance and continental cuisine.</p>
+                    </div>
+                    <div class="recommendation-card">
+                      <h4>Candies</h4>
+                      <p>Popular cafe serving sandwiches, pastries and comfort food.</p>
+                    </div>
+                    <div class="recommendation-card">
+                      <h4>Lucky Restaurant</h4>
+                      <p>Old-school eatery known for Bandra's best Chinese and Indian cuisine.</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="location-section">
+                  <h3><i class="fas fa-camera"></i> What to See</h3>
+                  <div class="recommendation-cards">
+                    <div class="recommendation-card">
+                      <h4>Bandstand Promenade</h4>
+                      <p>Seaside walkway offering views of the Bandra-Worli Sea Link and Arabian Sea.</p>
+                    </div>
+                    <div class="recommendation-card">
+                      <h4>Mount Mary Church</h4>
+                      <p>Historic Roman Catholic church with beautiful architecture.</p>
+                    </div>
+                    <div class="recommendation-card">
+                      <h4>Bandra Fort</h4>
+                      <p>Ancient fort offering panoramic views of the coastline.</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="location-section">
+                  <h3><i class="fas fa-map-pin"></i> Local Tips</h3>
+                  <ul class="tips-list">
+                    <li>Visit Carter Road in the evening for street food and sea views</li>
+                    <li>Explore the street art in Ranwar Village</li>
+                    <li>Shop at the boutiques on Linking Road</li>
+                    <li>Attend the Bandra Fair in September if possible</li>
+                    <li>Try the East Indian cuisine at local restaurants</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Juhu Content -->
+            <div class="location-content" id="juhu-content">
+              <div class="location-banner">
+                <img src="/static/img/juhu.jpg" alt="Juhu">
+                <div class="location-banner-overlay">
+                  <h2>Juhu</h2>
+                  <p>Mumbai's famous beach destination with vibrant street food</p>
+                </div>
+              </div>
+              
+              <div class="location-details">
+                <div class="location-section">
+                  <h3><i class="fas fa-info-circle"></i> About</h3>
+                  <p>Juhu is an upmarket neighborhood famous for its expansive beach along the Arabian Sea. It's popular among tourists and locals alike for its street food, celebrity homes, and recreational activities.</p>
+                </div>
+                
+                <div class="location-section">
+                  <h3><i class="fas fa-utensils"></i> Where to Eat</h3>
+                  <div class="recommendation-cards">
+                    <div class="recommendation-card">
+                      <h4>Juhu Beach Food Stalls</h4>
+                      <p>Try Mumbai's famous pav bhaji, gola, and other street foods right on the beach.</p>
+                    </div>
+                    <div class="recommendation-card">
+                      <h4>Prithvi Cafe</h4>
+                      <p>Artistic cafe at the Prithvi Theatre, known for its Irish coffee and relaxed ambiance.</p>
+                    </div>
+                    <div class="recommendation-card">
+                      <h4>Mahesh Lunch Home</h4>
+                      <p>Renowned seafood restaurant serving authentic Mangalorean cuisine.</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="location-section">
+                  <h3><i class="fas fa-camera"></i> What to See</h3>
+                  <div class="recommendation-cards">
+                    <div class="recommendation-card">
+                      <h4>Juhu Beach</h4>
+                      <p>Long sandy beach with views of the Arabian Sea and vibrant street food scene.</p>
+                    </div>
+                    <div class="recommendation-card">
+                      <h4>ISKCON Temple</h4>
+                      <p>Spiritual center dedicated to Lord Krishna with beautiful architecture.</p>
+                    </div>
+                    <div class="recommendation-card">
+                      <h4>Prithvi Theatre</h4>
+                      <p>Cultural landmark hosting quality theatrical performances.</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="location-section">
+                  <h3><i class="fas fa-map-pin"></i> Local Tips</h3>
+                  <ul class="tips-list">
+                    <li>Visit Juhu Beach during sunset for the best experience</li>
+                    <li>Try the pav bhaji and gola (ice dessert) from beach vendors</li>
+                    <li>Visit on weekdays to avoid crowds</li>
+                    <li>Check out Prithvi Theatre's schedule for cultural performances</li>
+                    <li>Take a morning walk on the beach to see locals exercising</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Andheri Content -->
+            <div class="location-content" id="andheri-content">
+              <div class="location-banner">
+                <img src="/static/img/andheri.jpg" alt="Andheri">
+                <div class="location-banner-overlay">
+                  <h2>Andheri</h2>
+                  <p>Commercial hub with shopping centers and entertainment</p>
+                </div>
+              </div>
+              
+              <div class="location-details">
+                <div class="location-section">
+                  <h3><i class="fas fa-info-circle"></i> About</h3>
+                  <p>Andheri is a bustling suburb and one of Mumbai's largest neighborhoods. It's divided into East and West, with Andheri East being a major commercial hub and Andheri West known for its shopping centers, restaurants, and nightlife.</p>
+                </div>
+                
+                <div class="location-section">
+                  <h3><i class="fas fa-utensils"></i> Where to Eat</h3>
+                  <div class="recommendation-cards">
+                    <div class="recommendation-card">
+                      <h4>The Street Kitchen</h4>
+                      <p>Popular spot serving a variety of street foods from across India.</p>
+                    </div>
+                    <div class="recommendation-card">
+                      <h4>Yauatcha</h4>
+                      <p>Upscale Chinese restaurant known for dim sum and fine dining.</p>
+                    </div>
+                    <div class="recommendation-card">
+                      <h4>Bombay Brasserie</h4>
+                      <p>Contemporary Indian cuisine with regional flavors from across the country.</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="location-section">
+                  <h3><i class="fas fa-camera"></i> What to See</h3>
+                  <div class="recommendation-cards">
+                    <div class="recommendation-card">
+                      <h4>Versova Beach</h4>
+                      <p>Less crowded beach in the vicinity with a more local atmosphere.</p>
+                    </div>
+                    <div class="recommendation-card">
+                      <h4>Fun Republic</h4>
+                      <p>Entertainment complex with movie theaters, shopping, and eateries.</p>
+                    </div>
+                    <div class="recommendation-card">
+                      <h4>Lokhandwala Complex</h4>
+                      <p>Popular shopping area with numerous boutiques and shops.</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="location-section">
+                  <h3><i class="fas fa-map-pin"></i> Local Tips</h3>
+                  <ul class="tips-list">
+                    <li>Visit Lokhandwala market for shopping and street food</li>
+                    <li>Check out Versova Beach for a quieter beach experience</li>
+                    <li>Explore the food options in Andheri East's corporate parks</li>
+                    <li>Use the metro to avoid traffic congestion</li>
+                    <li>Visit Gilbert Hill, a 66-million-year-old monolith column of black basalt</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
         <!-- Location Tab -->
         <div id="location" class="tab-content">
           <h2>Explore by Location</h2>
-          <div class="map-placeholder">Google Maps Integration Placeholder</div>
+          <div id="map" class="map-container"></div>
+          <div class="location-filters">
+            <select id="place-type">
+              <option value="">Select place type</option>
+              <option value="restaurant">Restaurants</option>
+              <option value="tourist_attraction">Attractions</option>
+              <option value="shopping_mall">Shopping</option>
+              <option value="hotel">Hotels</option>
+            </select>
+            <button id="search-places" class="btn">Search Places</button>
+          </div>
+          <div id="place-results" class="place-results"></div>
         </div>
 
         <!-- Chat Tab -->
@@ -648,78 +480,8 @@
       </div>
     </div>
 
-    <script>
-      // Tab Switching Logic
-      const tabLinks = document.querySelectorAll(".tab-link");
-      const tabContents = document.querySelectorAll(".tab-content");
-
-      tabLinks.forEach((link) => {
-        link.addEventListener("click", (e) => {
-          e.preventDefault();
-          const targetTab = link.getAttribute("data-tab");
-
-          // Remove active class from all links and tabs
-          tabLinks.forEach((link) => link.classList.remove("active"));
-          tabContents.forEach((content) => content.classList.remove("active"));
-
-          // Add active class to the clicked link and target tab
-          link.classList.add("active");
-          document.getElementById(targetTab).classList.add("active");
-        });
-      });
-
-      // Chat Functionality
-      document.getElementById("send-button").onclick = async function () {
-        const messageInput = document.getElementById("input-message");
-        const message = messageInput.value.trim();
-        if (!message) return;
-
-        addMessage(message, "user-message");
-        messageInput.value = "";
-
-        try {
-          const response = await fetch("/chat", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ message }),
-          });
-
-          if (!response.ok) throw new Error("Network response was not ok");
-
-          const data = await response.json();
-          addMessage(data, "bot-message");
-        } catch (error) {
-          console.error("Error:", error);
-          //addMessage(Error: ${error.message}, "bot-message");
-        }
-      };
-
-      function addMessage(text, className) {
-        const messagesContainer = document.getElementById("messages");
-        const messageElement = document.createElement("div");
-        messageElement.classList.add("message", className);
-        messageElement.textContent = text;
-        messagesContainer.appendChild(messageElement);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-      }
-      document.querySelectorAll(".subplace-card").forEach((card) => {
-        card.addEventListener("click", () => {
-          const subplace = card.dataset.subplace;
-          document.querySelectorAll(".subplace-content").forEach((content) => {
-            content.classList.remove("active");
-          });
-          document
-            .getElementById(`${subplace}-content`)
-            .classList.add("active");
-
-          // Smooth scroll to content
-          document.getElementById(`${subplace}-content`).scrollIntoView({
-            behavior: "smooth",
-          });
-        });
-      });
-    </script>
+    <!-- Custom JavaScript -->
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/maps.js"></script>
   </body>
 </html>

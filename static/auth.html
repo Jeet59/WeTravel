@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WeTravel Mumbai - Login</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      height: 100vh;
+      background-image: url("/static/bgmumbai.webp");
+      background-size: cover;
+      background-position: center;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 400px;
+      padding: 40px;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+      position: relative;
+      z-index: 2;
+    }
+    
+    .logo {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .logo h1 {
+      font-size: 28px;
+      color: #28a745;
+      font-weight: 700;
+    }
+    
+    .logo p {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .tabs {
+      display: flex;
+      margin-bottom: 30px;
+    }
+    
+    .tab {
+      flex: 1;
+      text-align: center;
+      padding: 15px;
+      cursor: pointer;
+      font-weight: 500;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .tab.active {
+      border-bottom: 2px solid #28a745;
+      color: #28a745;
+    }
+    
+    .form-container {
+      display: none;
+    }
+    
+    .form-container.active {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .input-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+    
+    .input-group i {
+      position: absolute;
+      top: 14px;
+      left: 15px;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 18px;
+    }
+    
+    .input-group input {
+      width: 100%;
+      padding: 15px 15px 15px 45px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+    
+    .input-group input:focus {
+      outline: none;
+      border-color: #28a745;
+      background: rgba(255, 255, 255, 0.15);
+    }
+    
+    .input-group input::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+    
+    .forgot-password {
+      text-align: right;
+      margin-bottom: 20px;
+    }
+    
+    .forgot-password a {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 14px;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .forgot-password a:hover {
+      color: #28a745;
+    }
+    
+    .btn {
+      width: 100%;
+      padding: 15px;
+      border-radius: 8px;
+      border: none;
+      background: linear-gradient(135deg, #28a745, #218838);
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+    }
+    
+    .social-login {
+      margin-top: 30px;
+      text-align: center;
+    }
+    
+    .social-login p {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 14px;
+      margin-bottom: 15px;
+      position: relative;
+    }
+    
+    .social-login p::before,
+    .social-login p::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 35%;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.2);
+    }
+    
+    .social-login p::before {
+      left: 0;
+    }
+    
+    .social-login p::after {
+      right: 0;
+    }
+    
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+    
+    .social-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .social-icon:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-3px);
+    }
+    
+    .social-icon i {
+      font-size: 20px;
+    }
+    
+    .error-message {
+      color: #dc3545;
+      font-size: 14px;
+      margin-top: 5px;
+      display: none;
+    }
+    
+    /* Responsive styles */
+    @media (max-width: 480px) {
+      .container {
+        padding: 25px;
+        max-width: 90%;
+      }
+      
+      .logo h1 {
+        font-size: 24px;
+      }
+      
+      .input-group input, .btn {
+        padding: 12px 12px 12px 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">
+      <h1>WeTravel Mumbai</h1>
+      <p>Your personal Mumbai travel assistant</p>
+    </div>
+    
+    <div class="tabs">
+      <div class="tab active" id="login-tab">Login</div>
+      <div class="tab" id="signup-tab">Sign Up</div>
+    </div>
+    
+    <div class="form-container active" id="login-form">
+      <form id="login-form-element">
+        <div class="input-group">
+          <i class="fas fa-envelope"></i>
+          <input type="email" id="login-email" placeholder="Email Address" required>
+          <div class="error-message" id="login-email-error"></div>
+        </div>
+        
+        <div class="input-group">
+          <i class="fas fa-lock"></i>
+          <input type="password" id="login-password" placeholder="Password" required>
+          <div class="error-message" id="login-password-error"></div>
+        </div>
+        
+        <div class="forgot-password">
+          <a href="#">Forgot Password?</a>
+        </div>
+        
+        <button type="submit" class="btn">Login</button>
+      </form>
+      
+      <div class="social-login">
+        <p>Or login with</p>
+        <div class="social-icons">
+          <div class="social-icon">
+            <i class="fab fa-google" style="color: #DB4437;"></i>
+          </div>
+          <div class="social-icon">
+            <i class="fab fa-facebook-f" style="color: #4267B2;"></i>
+          </div>
+          <div class="social-icon">
+            <i class="fab fa-twitter" style="color: #1DA1F2;"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-container" id="signup-form">
+      <form id="signup-form-element">
+        <div class="input-group">
+          <i class="fas fa-user"></i>
+          <input type="text" id="signup-name" placeholder="Full Name" required>
+          <div class="error-message" id="signup-name-error"></div>
+        </div>
+        
+        <div class="input-group">
+          <i class="fas fa-envelope"></i>
+          <input type="email" id="signup-email" placeholder="Email Address" required>
+          <div class="error-message" id="signup-email-error"></div>
+        </div>
+        
+        <div class="input-group">
+          <i class="fas fa-lock"></i>
+          <input type="password" id="signup-password" placeholder="Password" required>
+          <div class="error-message" id="signup-password-error"></div>
+        </div>
+        
+        <div class="input-group">
+          <i class="fas fa-lock"></i>
+          <input type="password" id="signup-confirm-password" placeholder="Confirm Password" required>
+          <div class="error-message" id="signup-confirm-password-error"></div>
+        </div>
+        
+        <button type="submit" class="btn">Sign Up</button>
+      </form>
+    </div>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const loginTab = document.getElementById('login-tab');
+      const signupTab = document.getElementById('signup-tab');
+      const loginForm = document.getElementById('login-form');
+      const signupForm = document.getElementById('signup-form');
+      const loginFormElement = document.getElementById('login-form-element');
+      const signupFormElement = document.getElementById('signup-form-element');
+      
+      // Switch between login and signup tabs
+      loginTab.addEventListener('click', function() {
+        loginTab.classList.add('active');
+        signupTab.classList.remove('active');
+        loginForm.classList.add('active');
+        signupForm.classList.remove('active');
+      });
+      
+      signupTab.addEventListener('click', function() {
+        signupTab.classList.add('active');
+        loginTab.classList.remove('active');
+        signupForm.classList.add('active');
+        loginForm.classList.remove('active');
+      });
+      
+      // Form submission for login
+      loginFormElement.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
+        
+        // For demo purposes: basic validation
+        let valid = true;
+        
+        if (!email) {
+          document.getElementById('login-email-error').textContent = 'Email is required';
+          document.getElementById('login-email-error').style.display = 'block';
+          valid = false;
+        } else {
+          document.getElementById('login-email-error').style.display = 'none';
+        }
+        
+        if (!password) {
+          document.getElementById('login-password-error').textContent = 'Password is required';
+          document.getElementById('login-password-error').style.display = 'block';
+          valid = false;
+        } else {
+          document.getElementById('login-password-error').style.display = 'none';
+        }
+        
+        if (valid) {
+          // For demo purposes, hardcoded credentials
+          if (email === "demo@example.com" && password === "password") {
+            // Store auth in session storage
+            sessionStorage.setItem('wetravel_auth', JSON.stringify({
+              email: email,
+              name: 'Demo User',
+              authenticated: true
+            }));
+            
+            // Redirect to main app
+            window.location.href = "/app";
+          } else {
+            alert("Invalid credentials. For demo, use: demo@example.com / password");
+          }
+        }
+      });
+      
+      // Form submission for signup
+      signupFormElement.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = document.getElementById('signup-name').value;
+        const email = document.getElementById('signup-email').value;
+        const password = document.getElementById('signup-password').value;
+        const confirmPassword = document.getElementById('signup-confirm-password').value;
+        
+        // For demo purposes: basic validation
+        let valid = true;
+        
+        if (!name) {
+          document.getElementById('signup-name-error').textContent = 'Name is required';
+          document.getElementById('signup-name-error').style.display = 'block';
+          valid = false;
+        } else {
+          document.getElementById('signup-name-error').style.display = 'none';
+        }
+        
+        if (!email) {
+          document.getElementById('signup-email-error').textContent = 'Email is required';
+          document.getElementById('signup-email-error').style.display = 'block';
+          valid = false;
+        } else {
+          document.getElementById('signup-email-error').style.display = 'none';
+        }
+        
+        if (!password) {
+          document.getElementById('signup-password-error').textContent = 'Password is required';
+          document.getElementById('signup-password-error').style.display = 'block';
+          valid = false;
+        } else {
+          document.getElementById('signup-password-error').style.display = 'none';
+        }
+        
+        if (password !== confirmPassword) {
+          document.getElementById('signup-confirm-password-error').textContent = 'Passwords do not match';
+          document.getElementById('signup-confirm-password-error').style.display = 'block';
+          valid = false;
+        } else {
+          document.getElementById('signup-confirm-password-error').style.display = 'none';
+        }
+        
+        if (valid) {
+          // For demo, just store user and redirect
+          sessionStorage.setItem('wetravel_auth', JSON.stringify({
+            email: email,
+            name: name,
+            authenticated: true
+          }));
+          
+          // Redirect to main app
+          window.location.href = "/app";
+        }
+      });
+      
+      // Check if already authenticated
+      const authData = sessionStorage.getItem('wetravel_auth');
+      if (authData) {
+        const auth = JSON.parse(authData);
+        if (auth.authenticated) {
+          window.location.href = "/app";
+        }
+      }
+    });
+  </script>
+</body>
+</html> 
