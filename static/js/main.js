@@ -119,31 +119,37 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Location Tabs Functionality
-  const locationTabs = document.querySelectorAll(".location-tab");
-  const locationContents = document.querySelectorAll(".location-content");
-  
-  locationTabs.forEach((tab) => {
-    tab.addEventListener("click", () => {
-      const location = tab.getAttribute("data-location");
-      
-      // Remove active class from all tabs and contents
-      locationTabs.forEach((t) => t.classList.remove("active"));
-      locationContents.forEach((c) => c.classList.remove("active"));
-      
-      // Add active class to selected tab and content
-      tab.classList.add("active");
-      document.getElementById(`${location}-content`).classList.add("active");
-      
-      // Smooth scroll to top of content (for mobile)
-      if (window.innerWidth <= 768) {
-        const contentContainer = document.querySelector(".location-content-container");
-        if (contentContainer) {
-          contentContainer.scrollIntoView({ behavior: "smooth", block: "start" });
+  // Handle location tabs
+  function initLocationTabs() {
+    const locationTabs = document.querySelectorAll('.location-tab');
+    const locationContents = document.querySelectorAll('.location-content');
+    
+    locationTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        // Remove active class from all tabs and content
+        locationTabs.forEach(t => t.classList.remove('active'));
+        locationContents.forEach(content => content.classList.remove('active'));
+        
+        // Add active class to clicked tab
+        tab.classList.add('active');
+        
+        // Show corresponding content
+        const location = tab.getAttribute('data-location');
+        const contentToShow = document.getElementById(`${location}-content`);
+        if (contentToShow) {
+          contentToShow.classList.add('active');
+          
+          // Smooth scroll on mobile
+          if (window.innerWidth < 768) {
+            contentToShow.scrollIntoView({ behavior: 'smooth' });
+          }
         }
-      }
+      });
     });
-  });
+  }
+
+  // Initialize location tabs when DOM is loaded
+  initLocationTabs();
 
   // Chat Functionality
   const sendButton = document.getElementById("send-button");
@@ -282,4 +288,319 @@ document.addEventListener('DOMContentLoaded', function() {
       if (sidebarOverlay) sidebarOverlay.style.display = 'none';
     }
   }
+
+  // Place Cards and Modal Functionality
+  function initPlaceCards() {
+    const placeCards = document.querySelectorAll('.recommendation-card.clickable');
+    const modal = document.getElementById('place-modal');
+    const closeModal = document.querySelector('.close-modal');
+    const startChatBtn = document.getElementById('start-chat-btn');
+    const nearbyRecommendationsBtn = document.getElementById('nearby-recommendations-btn');
+    const saveToTripBtn = document.getElementById('save-to-trip-btn');
+    
+    // Close modal when clicking X
+    if (closeModal) {
+      closeModal.addEventListener('click', () => {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto'; // Re-enable scrolling
+      });
+    }
+    
+    // Close modal when clicking outside
+    window.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto'; // Re-enable scrolling
+      }
+    });
+    
+    // Handle clicks on place cards
+    placeCards.forEach(card => {
+      card.addEventListener('click', () => {
+        const place = card.getAttribute('data-place');
+        const category = card.getAttribute('data-category');
+        const neighborhood = card.getAttribute('data-neighborhood');
+        const address = card.getAttribute('data-address') || 'Address information not available';
+        const mapUrl = card.getAttribute('data-map');
+        const description = card.querySelector('p').textContent;
+        const imageSrc = card.querySelector('.card-image img').src;
+        
+        // Set category label based on category
+        let categoryLabel = 'Place';
+        if (category === 'eat') categoryLabel = 'Restaurant & Dining';
+        if (category === 'see') categoryLabel = 'Attraction';
+        if (category === 'tip') categoryLabel = 'Local Tip';
+        
+        // Populate modal with place details
+        document.getElementById('modal-place-title').textContent = place;
+        document.getElementById('modal-place-neighborhood').textContent = neighborhood;
+        document.getElementById('modal-place-address').textContent = address;
+        document.getElementById('modal-place-description').textContent = description;
+        document.getElementById('modal-place-image').src = imageSrc;
+        document.getElementById('modal-place-category').textContent = categoryLabel;
+        
+        // Set map preview (This would ideally be replaced with a proper map embed)
+        if (mapUrl) {
+          document.getElementById('modal-map-preview').src = '/static/img/map-previews/' + neighborhood.toLowerCase() + '.jpg';
+        }
+        
+        // Configure chat button to open chat with context
+        if (startChatBtn) {
+          startChatBtn.onclick = () => {
+            openChatWithContext(place, neighborhood, category);
+          };
+        }
+        
+        // Configure nearby recommendations button
+        if (nearbyRecommendationsBtn) {
+          nearbyRecommendationsBtn.onclick = () => {
+            findNearbyPlaces(place, neighborhood, category);
+          };
+        }
+        
+        // Configure save to trip button
+        if (saveToTripBtn) {
+          // Check if this place is already saved
+          const savedTrips = JSON.parse(localStorage.getItem('wetravel_saved_places') || '[]');
+          const isAlreadySaved = savedTrips.some(item => item.name === place);
+          
+          if (isAlreadySaved) {
+            saveToTripBtn.innerHTML = '<i class="fas fa-check"></i> Saved to Trip';
+            saveToTripBtn.classList.add('saved');
+          } else {
+            saveToTripBtn.innerHTML = '<i class="fas fa-bookmark"></i> Save to My Trip';
+            saveToTripBtn.classList.remove('saved');
+          }
+          
+          saveToTripBtn.onclick = () => {
+            saveToTrip(place, neighborhood, category, description, imageSrc);
+          };
+        }
+        
+        // Display modal
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden'; // Prevent scrolling behind modal
+      });
+    });
+  }
+
+  // Open chat with context about the selected place
+  function openChatWithContext(place, neighborhood, category) {
+    // Default prompts based on category
+    let prompt = `I'm interested in ${place} in ${neighborhood}. What can you tell me about it?`;
+    
+    if (category === 'eat') {
+      prompt = `I'm planning to visit ${place} in ${neighborhood}. What's the best time to go, what dishes are they known for, and do I need a reservation?`;
+    } else if (category === 'see') {
+      prompt = `I want to visit ${place} in ${neighborhood}. What are the visiting hours, entrance fees, and what should I not miss while I'm there?`;
+    } else if (category === 'tip') {
+      prompt = `Tell me more about ${place} in ${neighborhood}. Is it worth visiting and what should I know before going?`;
+    }
+    
+    // Switch to chat tab
+    const chatTab = document.querySelector('.tab-item[data-tab="chat"]');
+    if (chatTab) {
+      chatTab.click();
+    }
+    
+    // Set the prompt in the chat input
+    const chatInput = document.querySelector('.chat-input textarea');
+    if (chatInput) {
+      chatInput.value = prompt;
+      chatInput.focus();
+    }
+    
+    // Close the modal
+    const modal = document.getElementById('place-modal');
+    if (modal) {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto'; // Re-enable scrolling
+    }
+  }
+
+  // Find nearby places based on the current place
+  function findNearbyPlaces(place, neighborhood, category) {
+    // This would ideally query a backend for actual nearby places
+    // For now, we'll show a notification with a placeholder
+    
+    showNotification(`Finding places similar to ${place} in ${neighborhood}...`, 'info');
+    
+    // Close the modal
+    const modal = document.getElementById('place-modal');
+    if (modal) {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto'; // Re-enable scrolling
+    }
+    
+    // Simulate loading - in a real app this would fetch data
+    setTimeout(() => {
+      // Show success message with placeholder
+      showNotification(`We've found 5 places similar to ${place} in ${neighborhood}!`, 'success');
+      
+      // Highlight similar cards (demo only - in real app would show actual similar places)
+      const similarCards = document.querySelectorAll(`.recommendation-card[data-neighborhood="${neighborhood}"]`);
+      similarCards.forEach(card => {
+        if (card.getAttribute('data-place') !== place) {
+          card.classList.add('highlight-similar');
+          
+          // Remove highlight after 3 seconds
+          setTimeout(() => {
+            card.classList.remove('highlight-similar');
+          }, 3000);
+        }
+      });
+    }, 1500);
+  }
+
+  // Save a place to My Trip
+  function saveToTrip(place, neighborhood, category, description, imageSrc) {
+    // Get existing saved places
+    const savedPlaces = JSON.parse(localStorage.getItem('wetravel_saved_places') || '[]');
+    
+    // Check if place is already saved
+    const existingPlaceIndex = savedPlaces.findIndex(item => item.name === place);
+    
+    if (existingPlaceIndex >= 0) {
+      // Remove place if already saved
+      savedPlaces.splice(existingPlaceIndex, 1);
+      localStorage.setItem('wetravel_saved_places', JSON.stringify(savedPlaces));
+      
+      // Update button
+      const saveToTripBtn = document.getElementById('save-to-trip-btn');
+      if (saveToTripBtn) {
+        saveToTripBtn.innerHTML = '<i class="fas fa-bookmark"></i> Save to My Trip';
+        saveToTripBtn.classList.remove('saved');
+      }
+      
+      showNotification(`Removed ${place} from your trip`, 'info');
+    } else {
+      // Add place to saved places
+      savedPlaces.push({
+        name: place,
+        neighborhood: neighborhood,
+        category: category,
+        description: description,
+        image: imageSrc,
+        savedAt: new Date().toISOString()
+      });
+      
+      // Save to localStorage
+      localStorage.setItem('wetravel_saved_places', JSON.stringify(savedPlaces));
+      
+      // Update button
+      const saveToTripBtn = document.getElementById('save-to-trip-btn');
+      if (saveToTripBtn) {
+        saveToTripBtn.innerHTML = '<i class="fas fa-check"></i> Saved to Trip';
+        saveToTripBtn.classList.add('saved');
+      }
+      
+      showNotification(`Added ${place} to your trip`, 'success');
+    }
+  }
+
+  // Initialize neighborhood filters
+  function initNeighborhoodFilters() {
+    const filterTabs = document.querySelectorAll('.filter-tab');
+    const categoryFilters = document.querySelectorAll('.category-filter');
+    
+    // Handle neighborhood filter tabs
+    filterTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        // Remove active class from all tabs
+        filterTabs.forEach(t => t.classList.remove('active'));
+        
+        // Add active class to clicked tab
+        tab.classList.add('active');
+        
+        // Apply filtering
+        applyFilters();
+      });
+    });
+    
+    // Handle category filters
+    categoryFilters.forEach(filter => {
+      filter.addEventListener('click', () => {
+        // Remove active class from all category filters
+        categoryFilters.forEach(f => f.classList.remove('active'));
+        
+        // Add active class to clicked filter
+        filter.classList.add('active');
+        
+        // Apply filtering
+        applyFilters();
+      });
+    });
+  }
+
+  // Apply filters based on selected neighborhood and category
+  function applyFilters() {
+    const selectedNeighborhood = document.querySelector('.filter-tab.active').getAttribute('data-filter');
+    const selectedCategory = document.querySelector('.category-filter.active').getAttribute('data-category');
+    
+    // Get all place cards
+    const allCards = document.querySelectorAll('.recommendation-card');
+    
+    // Show/hide cards based on filters
+    allCards.forEach(card => {
+      const cardNeighborhood = card.getAttribute('data-neighborhood')?.toLowerCase();
+      const cardCategory = card.getAttribute('data-category');
+      
+      let shouldShow = true;
+      
+      // Filter by neighborhood
+      if (selectedNeighborhood !== 'all' && cardNeighborhood !== selectedNeighborhood) {
+        shouldShow = false;
+      }
+      
+      // Filter by category
+      if (selectedCategory !== 'all' && cardCategory !== selectedCategory) {
+        shouldShow = false;
+      }
+      
+      // Show or hide the card
+      if (shouldShow) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  // Show notification
+  function showNotification(message, type = 'info') {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.innerHTML = `
+      <div class="notification-content">
+        <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-info-circle'}"></i>
+        <span>${message}</span>
+      </div>
+    `;
+    
+    // Add to document
+    document.body.appendChild(notification);
+    
+    // Show notification
+    setTimeout(() => {
+      notification.classList.add('show');
+    }, 10);
+    
+    // Remove after delay
+    setTimeout(() => {
+      notification.classList.remove('show');
+      setTimeout(() => {
+        notification.remove();
+      }, 300);
+    }, 3000);
+  }
+
+  // Initialize all neighborhood functionality
+  function initNeighborhoodFeatures() {
+    initPlaceCards();
+    initNeighborhoodFilters();
+  }
+
+  // Initialize neighborhood features when DOM is loaded
+  initNeighborhoodFeatures();
 }); 
