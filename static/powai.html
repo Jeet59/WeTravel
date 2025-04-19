@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Powai - WeTravel Mumbai</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="colaba-header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <img src="img/logo.svg" alt="WeTravel Logo">
+                </a>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="index.html#neighborhoods">Neighborhoods</a>
+                    <a href="index.html#map">Map</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="colaba-content">
+        <section class="hero-section">
+            <div class="container">
+                <h1>Explore Powai</h1>
+                <p>Modern tech hub with lakeside views and premium lifestyle</p>
+            </div>
+        </section>
+
+        <section class="neighborhood-details">
+            <div class="container">
+                <div class="two-column-layout">
+                    <div class="main-content">
+                        <h2>About Powai</h2>
+                        <p>
+                            Powai is one of Mumbai's fascinating neighborhoods with its own unique character and charm.
+                            Visitors can experience the local culture, explore markets, and enjoy authentic cuisine.
+                        </p>
+                        
+                        <div class="image-gallery">
+                            <img src="img/IIT Bombay.jpg" alt="Powai" class="feature-image">
+                            <div class="image-caption">Exploring the vibrant streets of Powai</div>
+                        </div>
+                        
+                        <h2 id="see">What to See</h2>
+                        <div class="attractions-list">
+                            <div class="attraction-card">
+                                <h3>Powai Lake</h3>
+                                <p>
+                                    Enjoy a peaceful sunset by the lake with scenic views. Perfect for evening walks and photography.
+                                </p>
+                            </div>
+                            
+                            <div class="attraction-card">
+                                <h3>IIT Bombay Campus</h3>
+                                <p>
+                                    Explore the lush green campus of one of India's premier engineering institutes. The campus offers beautiful walking paths and architecture.
+                                </p>
+                            </div>
+                            
+                            <div class="attraction-card">
+                                <h3>Hiranandani Gardens</h3>
+                                <p>
+                                    A well-planned township with unique architecture, shopping centers, and beautifully landscaped gardens.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <h2 id="eat">Where to Eat</h2>
+                        <div class="restaurant-list">
+                            <div class="restaurant-card">
+                                <h3>Mirchi & Mime</h3>
+                                <p>
+                                    An amazing dine-in experience with hearing and speech-impaired staff. They serve delicious Indian cuisine with a modern twist.
+                                </p>
+                            </div>
+                            
+                            <div class="restaurant-card">
+                                <h3>Chili's</h3>
+                                <p>
+                                    A solid choice for Tex-Mex cuisine, offering a good selection of American and Mexican dishes in a casual dining atmosphere.
+                                </p>
+                            </div>
+                            
+                            <div class="restaurant-card">
+                                <h3>The Terrace</h3>
+                                <p>
+                                    Rooftop dining with lake views, serving a variety of cuisines including North Indian, Chinese, and Continental dishes.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <h2 id="tips">Local Tips</h2>
+                        <ul class="tips-list">
+                            <li>Avoid main traffic hours—JVLR gets extremely congested during rush hours</li>
+                            <li>Evenings are best for lakeside walks when the weather is cooler</li>
+                            <li>Hiranandani has good coffee shops with Wi-Fi for remote working</li>
+                            <li>Visit D-Mart for budget shopping needs before heading to the premium outlets</li>
+                            <li>Use auto-rickshaws for short distances within Powai to avoid parking issues</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="sidebar">
+                        <div class="info-box">
+                            <h3>Getting There</h3>
+                            <p><i class="fas fa-train"></i> Nearest Railway Station</p>
+                            <p><i class="fas fa-bus"></i> Multiple BEST bus routes available</p>
+                            <p><i class="fas fa-car"></i> Taxi or rideshare recommended</p>
+                        </div>
+                        
+                        <div class="info-box">
+                            <h3>Best Time to Visit</h3>
+                            <p>October to March (Winter season)</p>
+                            <p>Mornings or evenings preferred</p>
+                        </div>
+                        
+                        <div class="map-container">
+                            <h3>Location</h3>
+                            <div id="powai-map" class="map"></div>
+                        </div>
+                        
+                        <div class="save-to-trip">
+                            <button id="save-powai-btn" class="btn primary-btn">
+                                <i class="fas fa-bookmark"></i> Save to My Trip
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo-section">
+                    <img src="img/logo.svg" alt="WeTravel Logo">
+                    <p>Discover the best of Mumbai with WeTravel</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#neighborhoods">Neighborhoods</a></li>
+                        <li><a href="index.html#map">Map</a></li>
+                        <li><a href="index.html#chat">Ask Assistant</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> info@wetravel.com</p>
+                    <p><i class="fas fa-phone"></i> +91 1234567890</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 WeTravel. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification toast -->
+    <div id="notification-toast" class="notification-toast">
+        <div class="notification-content">
+            <span class="notification-message">Notification message</span>
+            <button class="close-notification"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set up save button
+            const saveButton = document.getElementById('save-powai-btn');
+            if (saveButton) {
+                saveButton.addEventListener('click', function() {
+                    // Create a place object representing Powai
+                    const place = {
+                        name: 'Powai',
+                        description: 'Modern tech hub with lakeside views and premium lifestyle',
+                        image: 'img/IIT Bombay.jpg',
+                        type: 'neighborhood'
+                    };
+                    
+                    // Use the saveToTrip function from main.js
+                    if (typeof saveToTrip === 'function') {
+                        saveToTrip(place);
+                    } else {
+                        // Fallback if function not available
+                        console.log('Saving Powai to trip...');
+                        showNotification('Powai added to your trip!', 'success');
+                    }
+                });
+            }
+            
+            // Initialize notification system
+            function showNotification(message, type = 'info') {
+                const toast = document.getElementById('notification-toast');
+                const messageEl = toast.querySelector('.notification-message');
+                
+                if (toast && messageEl) {
+                    // Remove previous classes
+                    toast.classList.remove('success', 'error', 'info', 'warning');
+                    // Add appropriate class
+                    toast.classList.add(type);
+                    // Set message
+                    messageEl.textContent = message;
+                    // Show toast
+                    toast.classList.add('active');
+                    
+                    // Hide after 3 seconds
+                    setTimeout(() => {
+                        toast.classList.remove('active');
+                    }, 3000);
+                    
+                    // Close button
+                    const closeBtn = toast.querySelector('.close-notification');
+                    if (closeBtn) {
+                        closeBtn.onclick = function() {
+                            toast.classList.remove('active');
+                        };
+                    }
+                }
+            }
+        });
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initPowaiMap" async defer></script>
+    <script>
+        // Initialize map
+        function initPowaiMap() {
+            const location = { lat: 19.1176, lng: 72.9075 };
+            const map = new google.maps.Map(document.getElementById('powai-map'), {
+                zoom: 15,
+                center: location,
+                mapTypeControl: false,
+                fullscreenControl: false,
+                streetViewControl: false
+            });
+            
+            // Add marker for Powai
+            const marker = new google.maps.Marker({
+                position: location,
+                map: map,
+                title: 'Powai'
+            });
+        }
+    </script>
+</body>
+</html>

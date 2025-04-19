@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="1200" height="400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3498db;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8e44ad;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="seaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2980b9;stop-opacity:0.7" />
+      <stop offset="100%" style="stop-color:#3498db;stop-opacity:0.9" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Sky Background -->
+  <rect width="1200" height="400" fill="url(#skyGradient)" />
+  
+  <!-- Sea -->
+  <rect width="1200" height="120" y="280" fill="url(#seaGradient)" />
+  
+  <!-- Gateway of India (simplified) -->
+  <rect x="550" y="180" width="100" height="150" fill="#c1a56e" />
+  <path d="M540,180 L660,180 L600,120 Z" fill="#c1a56e" />
+  <rect x="570" y="220" width="60" height="80" fill="#5e4e2c" />
+  
+  <!-- Taj Mahal Hotel -->
+  <rect x="350" y="160" width="150" height="170" fill="#c19a6b" />
+  <rect x="400" y="110" width="50" height="50" fill="#c19a6b" />
+  <path d="M400,110 L450,110 L425,70 Z" fill="#a37e4e" />
+  
+  <!-- Marine Drive buildings -->
+  <rect x="100" y="200" width="40" height="130" fill="#ddd" />
+  <rect x="150" y="230" width="40" height="100" fill="#ddd" />
+  <rect x="200" y="210" width="40" height="120" fill="#ddd" />
+  <rect x="250" y="190" width="40" height="140" fill="#ddd" />
+  <rect x="300" y="220" width="40" height="110" fill="#ddd" />
+  
+  <!-- Modern buildings -->
+  <rect x="700" y="150" width="50" height="180" fill="#bbb" />
+  <rect x="760" y="120" width="40" height="210" fill="#bbb" />
+  <rect x="810" y="170" width="60" height="160" fill="#bbb" />
+  <rect x="880" y="140" width="40" height="190" fill="#bbb" />
+  <rect x="930" y="180" width="50" height="150" fill="#bbb" />
+  <rect x="990" y="160" width="40" height="170" fill="#bbb" />
+  <rect x="1040" y="190" width="60" height="140" fill="#bbb" />
+  
+  <!-- Small boats on the sea -->
+  <path d="M180,330 L200,330 L210,340 L170,340 Z" fill="#663300" />
+  <path d="M870,340 L890,340 L900,350 L860,350 Z" fill="#663300" />
+  <path d="M1100,320 L1120,320 L1130,330 L1090,330 Z" fill="#663300" />
+  
+  <!-- Sun -->
+  <circle cx="200" cy="80" r="40" fill="#f39c12" opacity="0.8" />
+  
+  <!-- Text -->
+  <text x="600" y="370" font-family="Arial" font-size="24" text-anchor="middle" fill="white" font-weight="bold">
+    MUMBAI - CITY OF DREAMS
+  </text>
+</svg> 

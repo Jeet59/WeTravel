@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colaba - WeTravel Mumbai</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/place-modals.css">
+    <style>
+        /* Custom styles for Colaba page */
+        .hero-section {
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('/static/img/Gateway.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 8rem 0;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .hero-section h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero-section p {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+        
+        .attraction-grid, .restaurant-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .attraction-card, .restaurant-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .attraction-card:hover, .restaurant-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .card-image {
+            height: 200px;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .attraction-card:hover .card-image img, 
+        .restaurant-card:hover .card-image img {
+            transform: scale(1.1);
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card-content h3 {
+            margin-top: 0;
+            margin-bottom: 0.75rem;
+            color: #0077cc;
+        }
+        
+        .card-content p {
+            margin-bottom: 0;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+        
+        .card-footer {
+            padding: 0 1.5rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .view-details-btn {
+            background-color: #0077cc;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .view-details-btn:hover {
+            background-color: #005fa3;
+        }
+        
+        .feature-image-container {
+            height: 400px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .feature-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .image-caption {
+            text-align: center;
+            margin-top: 1rem;
+            font-style: italic;
+            color: #666;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .section-header i {
+            font-size: 1.5rem;
+            margin-right: 0.75rem;
+            color: #0077cc;
+        }
+        
+        .section-header h2 {
+            margin: 0;
+        }
+        
+        /* Section links */
+        .section-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .section-links li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .section-links a {
+            display: block;
+            padding: 0.75rem;
+            color: #333;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            background-color: #f8f9fa;
+        }
+        
+        .section-links a:hover {
+            background-color: #0077cc;
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .section-links i {
+            margin-right: 0.75rem;
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Sidebar styling */
+        .sidebar {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .info-box {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .info-box h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: #0077cc;
+            display: flex;
+            align-items: center;
+        }
+        
+        .info-box h3 i {
+            margin-right: 0.5rem;
+        }
+        
+        .info-box p {
+            margin-bottom: 0.5rem;
+        }
+        
+        .map-container {
+            margin-bottom: 1.5rem;
+        }
+        
+        .map {
+            height: 250px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .save-to-trip {
+            text-align: center;
+        }
+        
+        .primary-btn {
+            width: 100%;
+            background-color: #0077cc;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+        
+        .primary-btn:hover {
+            background-color: #005fa3;
+        }
+        
+        /* Back to top button */
+        .back-to-top-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #0077cc;
+            color: white;
+            border: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+            transform: translateY(20px);
+        }
+        
+        .back-to-top-btn.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .back-to-top-btn:hover {
+            background-color: #005fa3;
+            transform: translateY(-5px);
+        }
+        
+        .back-to-top-btn i {
+            font-size: 1.5rem;
+        }
+        
+        @media (max-width: 992px) {
+            .two-column-layout {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .attraction-grid, .restaurant-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .feature-image-container {
+                height: 300px;
+            }
+            
+            .hero-section h1 {
+                font-size: 3rem;
+            }
+            
+            .hero-section p {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="colaba-header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <img src="img/logo.svg" alt="WeTravel Logo">
+                </a>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="index.html#neighborhoods">Neighborhoods</a>
+                    <a href="index.html#map">Map</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="colaba-content">
+        <section class="hero-section">
+            <div class="container">
+                <h1>Explore Colaba</h1>
+                <p>Mumbai's iconic southern neighborhood, home to historic landmarks and scenic waterfront views.</p>
+            </div>
+        </section>
+
+        <section class="neighborhood-details">
+            <div class="container">
+                <div class="two-column-layout">
+                    <div class="main-content">
+                        <div class="section-header">
+                            <i class="fas fa-info-circle"></i>
+                            <h2>About Colaba</h2>
+                        </div>
+                        <p>
+                            Colaba is the southernmost neighborhood of Mumbai, India. It is a vibrant district known for 
+                            its colonial-era architecture, bustling markets, and iconic landmarks. The area is a popular 
+                            tourist destination that offers a mix of historical sites, shopping experiences, and fine dining.
+                        </p>
+                        
+                        <div class="feature-image-container">
+                            <img src="img/Gateway.jpg" alt="Gateway of India" class="feature-image">
+                        </div>
+                        <div class="image-caption">The Gateway of India, an iconic monument in Colaba</div>
+                        
+                        <div class="section-header">
+                            <i class="fas fa-clock"></i>
+                            <h2>History</h2>
+                        </div>
+                        <p>
+                            Colaba derives its name from Kolabhat, a word in the language of the Koli fishermen, the area's 
+                            original inhabitants. During British colonial rule, it became an important military and commercial 
+                            center. The southern tip of Colaba was once a separate island that was later connected to the 
+                            main city by a causeway.
+                        </p>
+                        
+                        <div id="see" class="section-header">
+                            <i class="fas fa-camera"></i>
+                            <h2>What to See</h2>
+                        </div>
+                        <div class="attraction-grid">
+                            <div class="attraction-card">
+                                <div class="card-image">
+                                    <img src="img/Gateway.jpg" alt="Gateway of India">
+                                </div>
+                                <div class="card-content">
+                                    <h3>Gateway of India</h3>
+                                    <p>
+                                        Built to commemorate the visit of King George V and Queen Mary to Mumbai, this iconic 
+                                        monument has become the symbolic entrance to India for visitors arriving by sea.
+                                    </p>
+                                </div>
+                                <div class="card-footer">
+                                    <!-- View Details button will be added by JavaScript -->
+                                </div>
+                            </div>
+                            
+                            <div class="attraction-card">
+                                <div class="card-image">
+                                    <img src="img/Taj-Mahal-Palace.jpg" alt="Taj Mahal Palace Hotel">
+                                </div>
+                                <div class="card-content">
+                                    <h3>Taj Mahal Palace Hotel</h3>
+                                    <p>
+                                        This luxury hotel opened in 1903 and stands as a symbol of Indian hospitality. Its 
+                                        distinctive architecture combines Oriental, Florentine, and Moorish styles.
+                                    </p>
+                                </div>
+                                <div class="card-footer">
+                                    <!-- View Details button will be added by JavaScript -->
+                                </div>
+                            </div>
+                            
+                            <div class="attraction-card">
+                                <div class="card-image">
+                                    <img src="img/colaba attractions.jpg" alt="Colaba Causeway Market">
+                                </div>
+                                <div class="card-content">
+                                    <h3>Colaba Causeway Market</h3>
+                                    <p>
+                                        A bustling street market offering everything from clothing and accessories to souvenirs 
+                                        and handicrafts. It's a paradise for shoppers looking for bargains.
+                                    </p>
+                                </div>
+                                <div class="card-footer">
+                                    <!-- View Details button will be added by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="eat" class="section-header">
+                            <i class="fas fa-utensils"></i>
+                            <h2>Where to Eat</h2>
+                        </div>
+                        <div class="restaurant-grid">
+                            <div class="restaurant-card">
+                                <div class="card-image">
+                                    <img src="img/leopold_cafe.jpeg" alt="Leopold Cafe">
+                                </div>
+                                <div class="card-content">
+                                    <h3>Leopold Cafe</h3>
+                                    <p>
+                                        A historic cafe and restaurant established in 1871. It's famous for its colonial charm, 
+                                        diverse menu, and its mention in the novel "Shantaram."
+                                    </p>
+                                </div>
+                                <div class="card-footer">
+                                    <!-- View Details button will be added by JavaScript -->
+                                </div>
+                            </div>
+                            
+                            <div class="restaurant-card">
+                                <div class="card-image">
+                                    <img src="img/colaba dining.jpg" alt="Bademiya">
+                                </div>
+                                <div class="card-content">
+                                    <h3>Bademiya</h3>
+                                    <p>
+                                        An iconic street food stall known for its mouthwatering kebabs and rolls. It's been 
+                                        serving delicious food since 1946.
+                                    </p>
+                                </div>
+                                <div class="card-footer">
+                                    <!-- View Details button will be added by JavaScript -->
+                                </div>
+                            </div>
+                            
+                            <div class="restaurant-card">
+                                <div class="card-image">
+                                    <img src="img/colaba dining.jpg" alt="Cafe Mondegar">
+                                </div>
+                                <div class="card-content">
+                                    <h3>Cafe Mondegar</h3>
+                                    <p>
+                                        Known for its jukebox, beer, and walls adorned with cartoons by Mario Miranda. It's a 
+                                        popular hangout spot for locals and tourists alike.
+                                    </p>
+                                </div>
+                                <div class="card-footer">
+                                    <!-- View Details button will be added by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="tips" class="section-header">
+                            <i class="fas fa-lightbulb"></i>
+                            <h2>Local Tips</h2>
+                        </div>
+                        <ul class="tips-list">
+                            <li>The best time to visit Colaba is early morning to avoid crowds, especially at the Gateway of India.</li>
+                            <li>Bargaining is expected and part of the experience at Colaba Causeway Market.</li>
+                            <li>Take a ferry from the Gateway of India to visit Elephanta Caves, a UNESCO World Heritage Site.</li>
+                            <li>For a unique experience, try the Iranian cafes in the area, such as Kyani & Co.</li>
+                            <li>Visit the Colaba Fish Market early in the morning to see local fishermen selling their fresh catch.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="sidebar">
+                        <div class="info-box">
+                            <h3><i class="fas fa-train"></i> Getting There</h3>
+                            <p><i class="fas fa-train"></i> Churchgate Station (Western Line) - 20 min walk</p>
+                            <p><i class="fas fa-train"></i> CST Station (Central & Harbour Line) - 25 min walk</p>
+                            <p><i class="fas fa-bus"></i> Multiple BEST bus routes available</p>
+                        </div>
+                        
+                        <div class="info-box">
+                            <h3><i class="fas fa-clock"></i> Best Time to Visit</h3>
+                            <p>October to March (Winter season)</p>
+                            <p>Early mornings or late evenings to avoid crowds</p>
+                        </div>
+                        
+                        <div class="info-box">
+                            <h3><i class="fas fa-map-signs"></i> Jump to Section</h3>
+                            <ul class="section-links">
+                                <li><a href="#see"><i class="fas fa-camera"></i> What to See</a></li>
+                                <li><a href="#eat"><i class="fas fa-utensils"></i> Where to Eat</a></li>
+                                <li><a href="#tips"><i class="fas fa-lightbulb"></i> Local Tips</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="map-container">
+                            <h3><i class="fas fa-map-marked-alt"></i> Location</h3>
+                            <div id="colaba-map" class="map"></div>
+                        </div>
+                        
+                        <div class="save-to-trip">
+                            <button id="save-colaba-btn" class="primary-btn">
+                                <i class="fas fa-bookmark"></i> Save to My Trip
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo-section">
+                    <img src="img/logo.svg" alt="WeTravel Logo">
+                    <p>Discover the best of Mumbai with WeTravel</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#neighborhoods">Neighborhoods</a></li>
+                        <li><a href="index.html#map">Map</a></li>
+                        <li><a href="index.html#chat">Ask Assistant</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> info@wetravel.com</p>
+                    <p><i class="fas fa-phone"></i> +91 1234567890</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 WeTravel. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button id="back-to-top" class="back-to-top-btn">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Notification toast -->
+    <div id="notification-toast" class="notification-toast">
+        <div class="notification-content">
+            <span class="notification-message">Notification message</span>
+            <button class="close-notification"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/colaba-places.js"></script>
+    <script>
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set up save button
+            const saveButton = document.getElementById('save-colaba-btn');
+            if (saveButton) {
+                saveButton.addEventListener('click', function() {
+                    // Create a place object representing Colaba
+                    const colabaPlace = {
+                        name: 'Colaba',
+                        description: 'Mumbai\'s iconic southern neighborhood, home to historic landmarks and scenic waterfront views.',
+                        image: 'img/Gateway.jpg',
+                        type: 'neighborhood'
+                    };
+                    
+                    // Use the saveToTrip function from main.js
+                    if (typeof saveToTrip === 'function') {
+                        saveToTrip(colabaPlace);
+                    } else {
+                        // Fallback if function not available
+                        console.log('Saving Colaba to trip...');
+                        showNotification('Colaba added to your trip!', 'success');
+                    }
+                });
+            }
+            
+            // Back to top button
+            const backToTopButton = document.getElementById('back-to-top');
+            if (backToTopButton) {
+                // Show/hide button based on scroll position
+                window.addEventListener('scroll', function() {
+                    if (window.scrollY > 300) {
+                        backToTopButton.classList.add('visible');
+                    } else {
+                        backToTopButton.classList.remove('visible');
+                    }
+                });
+                
+                // Scroll to top when clicked
+                backToTopButton.addEventListener('click', function() {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+            
+            // Initialize notification system
+            function showNotification(message, type = 'info') {
+                const toast = document.getElementById('notification-toast');
+                const messageEl = toast.querySelector('.notification-message');
+                
+                if (toast && messageEl) {
+                    // Remove previous classes
+                    toast.classList.remove('success', 'error', 'info', 'warning');
+                    // Add appropriate class
+                    toast.classList.add(type);
+                    // Set message
+                    messageEl.textContent = message;
+                    // Show toast
+                    toast.classList.add('active');
+                    
+                    // Hide after 3 seconds
+                    setTimeout(() => {
+                        toast.classList.remove('active');
+                    }, 3000);
+                    
+                    // Close button
+                    const closeBtn = toast.querySelector('.close-notification');
+                    if (closeBtn) {
+                        closeBtn.onclick = function() {
+                            toast.classList.remove('active');
+                        };
+                    }
+                }
+            }
+        });
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initColabaMap" async defer></script>
+    <script>
+        // Initialize map
+        function initColabaMap() {
+            const colabaLocation = { lat: 18.9067, lng: 72.8147 };
+            const map = new google.maps.Map(document.getElementById('colaba-map'), {
+                zoom: 15,
+                center: colabaLocation,
+                mapTypeControl: false,
+                fullscreenControl: false,
+                streetViewControl: false
+            });
+            
+            // Add marker for Colaba
+            const marker = new google.maps.Marker({
+                position: colabaLocation,
+                map: map,
+                title: 'Colaba'
+            });
+        }
+    </script>
+</body>
+</html> 

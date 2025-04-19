@@ -1,10 +1,15 @@
 import chromadb
 from openai import OpenAI
+import os
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 class EmbeddingFunction:
     def __init__(self) -> None:
         self.openai = OpenAI(
-            api_key="NYJcYs6jfs9JrR0rOBhbdrdHST0mDkPp",
+            api_key=os.getenv("DEEPINFRA_API_KEY"),
             base_url="https://api.deepinfra.com/v1/openai"
         )
     

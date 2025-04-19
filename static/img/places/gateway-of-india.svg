@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="800" height="400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3498db;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8e44ad;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="400" fill="url(#bgGradient)" />
+  
+  <!-- Gateway of India (simplified) -->
+  <rect x="300" y="100" width="200" height="250" fill="#c1a56e" />
+  <path d="M280,100 L520,100 L400,30 Z" fill="#c1a56e" />
+  <rect x="340" y="180" width="120" height="160" fill="#5e4e2c" />
+  <rect x="380" y="180" width="40" height="100" fill="#c1a56e" />
+  
+  <!-- Decorative elements -->
+  <rect x="300" y="140" width="200" height="10" fill="#5e4e2c" />
+  <rect x="300" y="160" width="200" height="5" fill="#5e4e2c" />
+  
+  <!-- Sea in foreground -->
+  <rect width="800" height="50" y="350" fill="#2980b9" opacity="0.6" />
+  
+  <!-- Text -->
+  <text x="400" y="380" font-family="Arial" font-size="24" text-anchor="middle" fill="white" font-weight="bold">
+    GATEWAY OF INDIA
+  </text>
+</svg> 

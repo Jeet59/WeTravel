@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .water { fill: #97c2fc; }
+    .land { fill: #e0e0e0; }
+    .mumbai { fill: #ffffff; stroke: #cccccc; stroke-width: 2; }
+    .roads { stroke: #ffffff; stroke-width: 2; fill: none; }
+    .mainroads { stroke: #ffffff; stroke-width: 3; fill: none; }
+    .landmark { fill: #ff6b6b; stroke: #ffffff; stroke-width: 1; }
+    .landmark-label { font-family: 'Arial', sans-serif; font-size: 12px; fill: #333333; text-anchor: middle; }
+  </style>
+  
+  <!-- Background -->
+  <rect width="800" height="600" class="water" />
+  
+  <!-- Mumbai mainland -->
+  <path class="land" d="M 50,100 L 180,50 L 350,80 L 500,120 L 650,200 L 750,350 L 700,500 L 550,550 L 350,570 L 200,520 L 100,400 Z" />
+  
+  <!-- Mumbai city outline -->
+  <path class="mumbai" d="M 180,150 L 260,120 L 320,140 L 420,160 L 520,200 L 600,250 L 650,350 L 620,450 L 550,500 L 450,530 L 350,520 L 250,480 L 190,420 L 150,350 L 140,250 Z" />
+  
+  <!-- Main roads -->
+  <path class="mainroads" d="M 180,150 L 620,450" />
+  <path class="mainroads" d="M 260,120 L 550,500" />
+  <path class="mainroads" d="M 320,140 L 450,530" />
+  <path class="mainroads" d="M 140,250 L 650,350" />
+  
+  <!-- Secondary roads -->
+  <path class="roads" d="M 220,160 L 500,240" />
+  <path class="roads" d="M 300,200 L 420,380" />
+  <path class="roads" d="M 200,320 L 450,280" />
+  <path class="roads" d="M 380,170 L 280,420" />
+  <path class="roads" d="M 500,300 L 350,450" />
+  
+  <!-- Landmarks -->
+  <circle cx="230" cy="285" r="8" class="landmark" /> <!-- Colaba -->
+  <text x="230" y="315" class="landmark-label">Colaba</text>
+  
+  <circle cx="340" cy="230" r="8" class="landmark" /> <!-- Dadar -->
+  <text x="340" y="260" class="landmark-label">Dadar</text>
+  
+  <circle cx="400" cy="180" r="8" class="landmark" /> <!-- Bandra -->
+  <text x="400" y="210" class="landmark-label">Bandra</text>
+  
+  <circle cx="480" cy="220" r="8" class="landmark" /> <!-- Juhu -->
+  <text x="480" y="250" class="landmark-label">Juhu</text>
+  
+  <circle cx="530" cy="180" r="8" class="landmark" /> <!-- Andheri -->
+  <text x="530" y="210" class="landmark-label">Andheri</text>
+  
+  <circle cx="560" cy="300" r="8" class="landmark" /> <!-- Powai -->
+  <text x="560" y="330" class="landmark-label">Powai</text>
+</svg> 

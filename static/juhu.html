@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juhu - WeTravel Mumbai</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="colaba-header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <img src="img/logo.svg" alt="WeTravel Logo">
+                </a>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="index.html#neighborhoods">Neighborhoods</a>
+                    <a href="index.html#map">Map</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="colaba-content">
+        <section class="hero-section">
+            <div class="container">
+                <h1>Explore Juhu</h1>
+                <p>Mumbai's iconic beachfront suburb with celebrity homes, vibrant food scene, and gorgeous sunsets.</p>
+            </div>
+        </section>
+
+        <section class="neighborhood-details">
+            <div class="container">
+                <div class="two-column-layout">
+                    <div class="main-content">
+                        <h2>About Juhu</h2>
+                        <p>
+                            Juhu is one of Mumbai's most affluent and upmarket neighborhoods, famous for its expansive 
+                            beach and as home to many Bollywood celebrities. This coastal suburb offers a perfect blend 
+                            of natural beauty, entertainment options, and cultural experiences.
+                        </p>
+                        
+                        <div class="image-gallery">
+                            <img src="img/juhu attractions.jpg" alt="Juhu Beach" class="feature-image">
+                            <div class="image-caption">The popular Juhu Beach during sunset, a favorite among locals and tourists</div>
+                        </div>
+                        
+                        <h3>History</h3>
+                        <p>
+                            Once a separate island, Juhu became connected to the rest of Mumbai during the colonial era. 
+                            Its transition from a quiet fishing village to a glamorous suburb began in the mid-20th 
+                            century when film personalities started building homes here. Today, it stands as one of the 
+                            city's prime residential and recreational areas.
+                        </p>
+                        
+                        <h2 id="see">What to See</h2>
+                        <div class="attractions-list">
+                            <div class="attraction-card">
+                                <h3>Juhu Beach</h3>
+                                <p>
+                                    The heart of the neighborhood, this expansive beach offers stunning sunsets, 
+                                    horse rides, and a plethora of street food options. It's a perfect spot for 
+                                    evening walks and experiencing local culture.
+                                </p>
+                            </div>
+                            
+                            <div class="attraction-card">
+                                <h3>ISKCON Temple</h3>
+                                <p>
+                                    A spiritual haven dedicated to Lord Krishna, this architectural marvel attracts devotees 
+                                    and tourists alike. The temple complex includes a restaurant serving delicious 
+                                    vegetarian food.
+                                </p>
+                            </div>
+                            
+                            <div class="attraction-card">
+                                <h3>Prithvi Theatre</h3>
+                                <p>
+                                    A cultural landmark founded by Bollywood's Kapoor family, this intimate theater hosts 
+                                    plays, workshops, and has a lovely café that's a favorite among theater enthusiasts.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <h2 id="eat">Where to Eat</h2>
+                        <div class="restaurant-list">
+                            <div class="restaurant-card">
+                                <h3>Juhu Chowpatty Food Stalls</h3>
+                                <p>
+                                    The beachfront is lined with food stalls serving Mumbai's famous street food like 
+                                    pav bhaji, bhel puri, and gola (ice treats). A must-visit for authentic local flavors.
+                                </p>
+                            </div>
+                            
+                            <div class="restaurant-card">
+                                <h3>Cafe Moshe's</h3>
+                                <p>
+                                    A popular café known for its Mediterranean cuisine, freshly baked goods, and relaxed 
+                                    ambiance. Perfect for a quiet breakfast or lunch.
+                                </p>
+                            </div>
+                            
+                            <div class="restaurant-card">
+                                <h3>Mahesh Lunch Home</h3>
+                                <p>
+                                    A renowned seafood restaurant serving Mangalorean cuisine. Known for its butter garlic 
+                                    crabs, prawns, and authentic coastal flavors.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <h2 id="tips">Local Tips</h2>
+                        <ul class="tips-list">
+                            <li>Visit Juhu Beach during weekdays to avoid crowds, especially in the evening.</li>
+                            <li>Carry cash for street food vendors who may not accept cards.</li>
+                            <li>Try the famous "Mumbai sandwich" at the beach food stalls.</li>
+                            <li>Check out Prithvi Theatre's schedule for cultural performances and events.</li>
+                            <li>The best time to photograph Juhu Beach is during sunset when the colors are most vibrant.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="sidebar">
+                        <div class="info-box">
+                            <h3>Getting There</h3>
+                            <p><i class="fas fa-train"></i> Vile Parle Station (Western Line) - 15 min drive</p>
+                            <p><i class="fas fa-train"></i> Andheri Station (Western & Metro Line) - 20 min drive</p>
+                            <p><i class="fas fa-bus"></i> Multiple BEST bus routes available</p>
+                        </div>
+                        
+                        <div class="info-box">
+                            <h3>Best Time to Visit</h3>
+                            <p>October to March (Winter season)</p>
+                            <p>Evening time for beach sunset</p>
+                        </div>
+                        
+                        <div class="map-container">
+                            <h3>Location</h3>
+                            <div id="juhu-map" class="map"></div>
+                        </div>
+                        
+                        <div class="save-to-trip">
+                            <button id="save-juhu-btn" class="btn primary-btn">
+                                <i class="fas fa-bookmark"></i> Save to My Trip
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo-section">
+                    <img src="img/logo.svg" alt="WeTravel Logo">
+                    <p>Discover the best of Mumbai with WeTravel</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#neighborhoods">Neighborhoods</a></li>
+                        <li><a href="index.html#map">Map</a></li>
+                        <li><a href="index.html#chat">Ask Assistant</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> info@wetravel.com</p>
+                    <p><i class="fas fa-phone"></i> +91 1234567890</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 WeTravel. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification toast -->
+    <div id="notification-toast" class="notification-toast">
+        <div class="notification-content">
+            <span class="notification-message">Notification message</span>
+            <button class="close-notification"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set up save button
+            const saveButton = document.getElementById('save-juhu-btn');
+            if (saveButton) {
+                saveButton.addEventListener('click', function() {
+                    // Create a place object representing Juhu
+                    const juhuPlace = {
+                        name: 'Juhu',
+                        description: 'Mumbai\'s iconic beachfront suburb with celebrity homes, vibrant food scene, and gorgeous sunsets.',
+                        image: 'img/juhu attractions.jpg',
+                        type: 'neighborhood'
+                    };
+                    
+                    // Use the saveToTrip function from main.js
+                    if (typeof saveToTrip === 'function') {
+                        saveToTrip(juhuPlace);
+                    } else {
+                        // Fallback if function not available
+                        console.log('Saving Juhu to trip...');
+                        showNotification('Juhu added to your trip!', 'success');
+                    }
+                });
+            }
+            
+            // Initialize notification system
+            function showNotification(message, type = 'info') {
+                const toast = document.getElementById('notification-toast');
+                const messageEl = toast.querySelector('.notification-message');
+                
+                if (toast && messageEl) {
+                    // Remove previous classes
+                    toast.classList.remove('success', 'error', 'info', 'warning');
+                    // Add appropriate class
+                    toast.classList.add(type);
+                    // Set message
+                    messageEl.textContent = message;
+                    // Show toast
+                    toast.classList.add('active');
+                    
+                    // Hide after 3 seconds
+                    setTimeout(() => {
+                        toast.classList.remove('active');
+                    }, 3000);
+                    
+                    // Close button
+                    const closeBtn = toast.querySelector('.close-notification');
+                    if (closeBtn) {
+                        closeBtn.onclick = function() {
+                            toast.classList.remove('active');
+                        };
+                    }
+                }
+            }
+        });
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initJuhuMap" async defer></script>
+    <script>
+        // Initialize map
+        function initJuhuMap() {
+            const juhuLocation = { lat: 19.0883, lng: 72.8264 };
+            const map = new google.maps.Map(document.getElementById('juhu-map'), {
+                zoom: 15,
+                center: juhuLocation,
+                mapTypeControl: false,
+                fullscreenControl: false,
+                streetViewControl: false
+            });
+            
+            // Add marker for Juhu
+            const marker = new google.maps.Marker({
+                position: juhuLocation,
+                map: map,
+                title: 'Juhu'
+            });
+        }
+    </script>
+</body>
+</html> 

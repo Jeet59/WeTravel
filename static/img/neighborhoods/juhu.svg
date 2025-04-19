@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="800" height="400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f39c12;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d35400;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="seaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3498db;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#2980b9;stop-opacity:0.8" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="400" fill="url(#bgGradient)" />
+  
+  <!-- Sun setting -->
+  <circle cx="650" cy="100" r="60" fill="white" opacity="0.8" />
+  
+  <!-- Beach with waves -->
+  <rect width="800" height="160" y="240" fill="#f9d5a7" />
+  <path d="M0,280 Q50,260 100,280 Q150,300 200,280 Q250,260 300,280 Q350,300 400,280 Q450,260 500,280 Q550,300 600,280 Q650,260 700,280 Q750,300 800,280 L800,400 L0,400 Z" fill="url(#seaGradient)" />
+  
+  <!-- Palm trees -->
+  <rect x="200" y="200" width="10" height="40" fill="#795548" />
+  <path d="M205,200 Q170,180 180,150" stroke="#4CAF50" stroke-width="5" fill="none" />
+  <path d="M205,200 Q240,180 230,150" stroke="#4CAF50" stroke-width="5" fill="none" />
+  <path d="M205,190 Q170,170 160,140" stroke="#4CAF50" stroke-width="5" fill="none" />
+  <path d="M205,190 Q240,170 250,140" stroke="#4CAF50" stroke-width="5" fill="none" />
+  
+  <rect x="600" y="200" width="10" height="40" fill="#795548" />
+  <path d="M605,200 Q570,180 580,150" stroke="#4CAF50" stroke-width="5" fill="none" />
+  <path d="M605,200 Q640,180 630,150" stroke="#4CAF50" stroke-width="5" fill="none" />
+  <path d="M605,190 Q570,170 560,140" stroke="#4CAF50" stroke-width="5" fill="none" />
+  <path d="M605,190 Q640,170 650,140" stroke="#4CAF50" stroke-width="5" fill="none" />
+  
+  <!-- Text -->
+  <text x="400" y="350" font-family="Arial" font-size="40" text-anchor="middle" fill="white" font-weight="bold">
+    JUHU
+  </text>
+  <text x="400" y="380" font-family="Arial" font-size="18" text-anchor="middle" fill="white">
+    Beachside area with entertainment
+  </text>
+</svg> 

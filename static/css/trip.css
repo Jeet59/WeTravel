@@ -1,0 +1,312 @@
+/* WeTravel Mumbai - Trip Tab Styles
+-------------------------------------------------- */
+
+.trip-container {
+  display: flex;
+  gap: 30px;
+}
+
+.trip-sidebar {
+  width: 300px;
+  flex-shrink: 0;
+}
+
+.trip-controls {
+  background-color: white;
+  border-radius: var(--border-radius);
+  padding: 20px;
+  box-shadow: var(--box-shadow);
+  margin-bottom: 20px;
+}
+
+.trip-controls h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.trip-dates {
+  margin-bottom: 20px;
+}
+
+.date-field {
+  margin-bottom: 10px;
+}
+
+.date-field label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: var(--text-dark);
+}
+
+.date-field input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.saved-plans {
+  background-color: white;
+  border-radius: var(--border-radius);
+  padding: 20px;
+  box-shadow: var(--box-shadow);
+}
+
+.saved-plans h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.plan-list {
+  list-style: none;
+}
+
+.plan-list li {
+  padding: 12px 15px;
+  background-color: #f5f5f5;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 14px;
+}
+
+.plan-list li:hover {
+  background-color: #e0e0e0;
+}
+
+.plan-list li.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.trip-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.saved-places-section {
+  background-color: white;
+  border-radius: var(--border-radius);
+  padding: 20px;
+  box-shadow: var(--box-shadow);
+}
+
+.saved-places-section h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.trip-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 20px;
+}
+
+.trip-item {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  overflow: hidden;
+  transition: var(--transition);
+  cursor: pointer;
+  position: relative;
+}
+
+.trip-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.trip-item-image {
+  height: 140px;
+  overflow: hidden;
+}
+
+.trip-item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.trip-item:hover .trip-item-image img {
+  transform: scale(1.05);
+}
+
+.trip-item-info {
+  padding: 15px;
+}
+
+.trip-item-info h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.trip-item-info .neighborhood {
+  font-size: 14px;
+  color: var(--primary-color);
+  margin-bottom: 8px;
+}
+
+.trip-item-info .description {
+  font-size: 12px;
+  color: rgba(0,0,0,0.6);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.trip-item-actions {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.remove-trip-item {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.remove-trip-item:hover {
+  background-color: var(--danger-color);
+}
+
+.empty-trip-message {
+  text-align: center;
+  padding: 50px 20px;
+  color: rgba(0,0,0,0.5);
+}
+
+.empty-trip-message i {
+  font-size: 48px;
+  margin-bottom: 15px;
+  color: var(--primary-color);
+}
+
+.trip-day-planner {
+  background-color: white;
+  border-radius: var(--border-radius);
+  padding: 20px;
+  box-shadow: var(--box-shadow);
+}
+
+.trip-day-planner h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.itinerary-timeline {
+  position: relative;
+  padding-left: 45px;
+}
+
+.itinerary-timeline::before {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 0;
+  height: 100%;
+  width: 2px;
+  background-color: var(--primary-color);
+}
+
+.itinerary-item {
+  display: flex;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.item-time {
+  position: absolute;
+  left: -45px;
+  width: 40px;
+  text-align: right;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-dark);
+  top: 0;
+}
+
+.itinerary-item::before {
+  content: '';
+  position: absolute;
+  left: -53px;
+  top: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: white;
+  border: 3px solid var(--primary-color);
+}
+
+.item-content {
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  padding: 15px;
+  width: 100%;
+}
+
+.item-content h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.item-content p {
+  font-size: 14px;
+  color: rgba(0,0,0,0.6);
+  margin-bottom: 10px;
+}
+
+.item-actions {
+  display: flex;
+  gap: 5px;
+  justify-content: flex-end;
+}
+
+.add-activity {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-sm {
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
+@media (max-width: 992px) {
+  .trip-container {
+    flex-direction: column;
+  }
+  
+  .trip-sidebar {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .trip-items {
+    grid-template-columns: 1fr;
+  }
+} 

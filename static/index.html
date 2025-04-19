@@ -1,1463 +1,745 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WeTravel Mumbai</title>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Maps API -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places&v=beta"></script>
-    <!-- Custom CSS -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeTravel Mumbai - Your Intelligent Travel Assistant</title>
     <link rel="stylesheet" href="/static/css/styles.css">
-    <link rel="stylesheet" href="/static/css/mobile-menu.css">
-    <link rel="stylesheet" href="/static/css/enhanced-ui.css">
-    <!-- Theme Color for Mobile Browsers -->
-    <meta name="theme-color" content="#121212">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="description" content="WeTravel Mumbai - Your AI-powered travel companion for exploring Mumbai, India">
   </head>
   <body>
-    <div class="sidebar-overlay"></div>
-    <button id="sidebar-toggle" class="sidebar-toggle" aria-label="Toggle navigation">
-      <i class="fas fa-bars"></i>
-    </button>
-    
-    <div class="dashboard">
+    <div class="app-container">
       <!-- Sidebar -->
-      <div class="sidebar" id="sidebar">
-        <div class="user-profile">
-          <div class="avatar">
-            <span class="profile-image profile-initials"></span>
-          </div>
-          <div class="user-info">
-            <h3 id="user-name" class="profile-name">User</h3>
-            <p id="user-email" class="profile-email">user@example.com</p>
-          </div>
+      <div id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+          <img src="/static/img/logo.svg" alt="WeTravel Mumbai" class="sidebar-logo">
+          <h1>WeTravel<span>Mumbai</span></h1>
         </div>
-        <h2>WeTravel Mumbai</h2>
-        <ul>
-          <li>
-            <a href="#home" class="tab-link active" data-tab="home"><i class="fas fa-home"></i> Home</a>
+        
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="#home" class="nav-link active" data-tab="home">
+              <i class="fas fa-home"></i> Home
+            </a>
           </li>
-          <li>
-            <a href="#subplaces" class="tab-link" data-tab="subplaces"><i class="fas fa-map-marker-alt"></i> Neighborhoods</a>
+          <li class="nav-item">
+            <a href="#neighborhoods" class="nav-link" data-tab="neighborhoods">
+              <i class="fas fa-map-marker-alt"></i> Neighborhoods
+            </a>
           </li>
-          <li>
-            <a href="#itinerary" class="tab-link" data-tab="itinerary"><i class="fas fa-route"></i> Itinerary Planner</a>
+          <li class="nav-item">
+            <a href="#chat" class="nav-link" data-tab="chat">
+              <i class="fas fa-comment-alt"></i> Chat Assistant
+            </a>
           </li>
-          <li>
-            <a href="#location" class="tab-link" data-tab="location"><i class="fas fa-map"></i> Interactive Map</a>
+          <li class="nav-item">
+            <a href="#map" class="nav-link" data-tab="map">
+              <i class="fas fa-map"></i> Interactive Map
+            </a>
           </li>
-          <li>
-            <a href="#resources" class="tab-link" data-tab="resources"><i class="fas fa-info-circle"></i> Travel Resources</a>
+          <li class="nav-item">
+            <a href="#trip" class="nav-link" data-tab="trip">
+              <i class="fas fa-suitcase"></i> My Trip
+            </a>
           </li>
-          <li>
-            <a href="#gallery" class="tab-link" data-tab="gallery"><i class="fas fa-images"></i> Photo Gallery</a>
-          </li>
-          <li>
-            <a href="#chat" class="tab-link" data-tab="chat"><i class="fas fa-comments"></i> AI Travel Assistant</a>
-          </li>
-          <li>
-            <a href="#profile" class="tab-link" data-tab="profile"><i class="fas fa-user-cog"></i> My Profile</a>
+          <li class="nav-item">
+            <a href="#profile" class="nav-link" data-tab="profile">
+              <i class="fas fa-user"></i> Profile
+            </a>
           </li>
         </ul>
-        <div class="sidebar-footer">
-          <button id="logout-button" class="logout-btn">
-            <i class="fas fa-sign-out-alt"></i> Logout
+        
+        <!-- User Profile in Sidebar -->
+        <div class="user-profile">
+          <div class="user-icon">
+            <i class="fas fa-user-circle"></i>
+          </div>
+          <div class="user-info">
+            <h3 class="user-name">Guest User</h3>
+            <p class="user-email">guest@example.com</p>
+          </div>
+          <button class="logout-btn">
+            <i class="fas fa-sign-out-alt"></i>
           </button>
         </div>
       </div>
+      
+      <!-- Sidebar Toggle for Mobile -->
+      <button id="sidebar-toggle" class="sidebar-toggle">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <!-- Sidebar Overlay for Mobile -->
+      <div class="sidebar-overlay"></div>
 
       <!-- Main Content -->
       <div class="main-content">
         <!-- Home Tab -->
-        <div id="home" class="tab-content active">
-          <div class="dashboard-header">
-            <h2>Welcome to WeTravel Mumbai</h2>
-            <p class="dashboard-subtitle">
-              Intelligent Travel Assistance Platform
-            </p>
-          </div>
-
-          <div class="metrics-container">
-            <div class="metric-card">
-              <div class="metric-icon"><i class="fas fa-map-pin"></i></div>
-              <div class="metric-content">
-                <h3>Places Covered</h3>
-                <p class="metric-value">150+</p>
-                <p class="metric-label">Locations in Mumbai</p>
+        <div id="home" class="tab-container active">
+          <div class="hero-section">
+            <div class="hero-content">
+              <h1>WeTravel Mumbai</h1>
+              <p class="hero-subtitle">Your AI-powered companion for exploring the city of dreams</p>
+              <div class="hero-cta">
+                <a href="#neighborhoods" class="btn primary-btn" id="explore-btn">
+                  <i class="fas fa-map-marked-alt"></i> Explore Neighborhoods
+                </a>
+                <a href="#chat" class="btn secondary-btn" id="ask-assistant-btn">
+                  <i class="fas fa-comment-alt"></i> Ask Our Assistant
+                </a>
               </div>
             </div>
-
-            <div class="metric-card">
-              <div class="metric-icon"><i class="fas fa-comment-dots"></i></div>
-              <div class="metric-content">
-                <h3>Daily Queries</h3>
-                <p class="metric-value">1.2k</p>
-                <p class="metric-label">Conversations</p>
-              </div>
-            </div>
-
-            <div class="metric-card">
-              <div class="metric-icon"><i class="fas fa-chart-pie"></i></div>
-              <div class="metric-content">
-                <h3>Data Accuracy</h3>
-                <p class="metric-value">98%</p>
-                <p class="metric-label">Verified Information</p>
-              </div>
+            <div class="hero-image">
+              <img src="/static/img/mumbai skylines.jpg" alt="Mumbai Skyline">
             </div>
           </div>
 
-          <div class="dashboard-section">
-            <h3>System Overview</h3>
-            <div class="feature-grid">
+          <div class="app-features">
+            <h2 class="section-title">Smart Travel Planning</h2>
+            <div class="features-grid">
               <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-robot"></i></div>
-                <h4>AI-Powered Chat</h4>
-                <p>
-                  Natural language processing with retrieval-augmented
-                  generation for accurate responses
-                </p>
+                <div class="feature-icon">
+                  <i class="fas fa-map-marked-alt"></i>
+                </div>
+                <h3>Interactive Maps</h3>
+                <p>Explore Mumbai with our detailed interactive maps that highlight the best spots in each neighborhood.</p>
               </div>
-
+              
               <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-map-marked-alt"></i></div>
-                <h4>Smart Mapping</h4>
-                <p>
-                  Integrated location services with contextual place information
-                </p>
+                <div class="feature-icon">
+                  <i class="fas fa-robot"></i>
+                </div>
+                <h3>AI Assistant</h3>
+                <p>Get personalized recommendations and answers to your travel questions from our intelligent assistant.</p>
               </div>
-
+              
               <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-book-open"></i></div>
-                <h4>Knowledge Base</h4>
-                <p>
-                  Curated database of historical, cultural, and practical
-                  information
-                </p>
+                <div class="feature-icon">
+                  <i class="fas fa-route"></i>
+                </div>
+                <h3>Trip Planner</h3>
+                <p>Create and customize your perfect Mumbai itinerary with our easy-to-use trip planning tools.</p>
               </div>
-
+              
               <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-bolt"></i></div>
-                <h4>Real-time Updates</h4>
-                <p>
-                  Dynamic information including events, traffic, and weather
-                </p>
+                <div class="feature-icon">
+                  <i class="fas fa-bookmark"></i>
+                </div>
+                <h3>Save Favorites</h3>
+                <p>Bookmark your favorite places and create personalized collections for quick access.</p>
               </div>
             </div>
           </div>
 
-          <div class="dashboard-section">
-            <h3>Recent Updates</h3>
-            <div class="update-list">
-              <div class="update-item">
-                <div class="update-badge">NEW</div>
-                <p>Added 15 new heritage locations in South Mumbai</p>
+          <div class="how-it-works">
+            <h2 class="section-title">How WeTravel Works</h2>
+            <div class="steps-container">
+              <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                  <h3>Explore</h3>
+                  <p>Browse through Mumbai's diverse neighborhoods and discover hidden gems.</p>
+                </div>
               </div>
-              <div class="update-item">
-                <div class="update-badge">IMPROVED</div>
-                <p>Enhanced chat response time by 40%</p>
+              
+              <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                  <h3>Save</h3>
+                  <p>Bookmark places you want to visit to build your personalized travel collection.</p>
+                </div>
               </div>
-              <div class="update-item">
-                <div class="update-badge">COMING SOON</div>
-                <p>Mobile app integration with live navigation</p>
+              
+              <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                  <h3>Plan</h3>
+                  <p>Create a day-by-day itinerary that fits your schedule and preferences.</p>
+                </div>
               </div>
+              
+              <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                  <h3>Experience</h3>
+                  <p>Enjoy Mumbai with confidence using our detailed guides and real-time assistance.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="app-stats">
+            <h2 class="section-title">Mumbai at Your Fingertips</h2>
+            <div class="stats-container">
+              <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-map-marked-alt"></i></div>
+                <div class="stat-value">10+</div>
+                <div class="stat-label">Neighborhoods</div>
+              </div>
+              
+              <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-utensils"></i></div>
+                <div class="stat-value">50+</div>
+                <div class="stat-label">Dining Spots</div>
+              </div>
+              
+              <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-camera"></i></div>
+                <div class="stat-value">30+</div>
+                <div class="stat-label">Attractions</div>
+              </div>
+              
+              <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-lightbulb"></i></div>
+                <div class="stat-value">25+</div>
+                <div class="stat-label">Local Tips</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="showcase-section">
+            <div class="showcase-content">
+              <h2>Discover the Real Mumbai</h2>
+              <p>From iconic landmarks to hidden street food gems, WeTravel helps you experience Mumbai like a local. Our curated guides combine expert knowledge with personalized recommendations.</p>
+              <a href="#neighborhoods" class="btn primary-btn" id="start-exploring-btn">Start Exploring</a>
+            </div>
+            <div class="showcase-image">
+              <img src="/static/img/Gateway.jpg" alt="Gateway of India">
+            </div>
+          </div>
+
+          <div class="testimonials">
+            <h2 class="section-title">What Travelers Say</h2>
+            <div class="testimonial-grid">
+              <div class="testimonial-card">
+                <div class="testimonial-content">
+                  <p>"WeTravel helped me discover parts of Mumbai I would have never found on my own. The AI assistant was like having a local friend!"</p>
+                </div>
+                <div class="testimonial-author">
+                  <div class="author-name">Sarah T.</div>
+                  <div class="author-location">United States</div>
+                </div>
+              </div>
+              
+              <div class="testimonial-card">
+                <div class="testimonial-content">
+                  <p>"Planning my Mumbai trip was so easy with this app. The neighborhood guides are detailed and the trip planner saved me hours of research."</p>
+                </div>
+                <div class="testimonial-author">
+                  <div class="author-name">Raj M.</div>
+                  <div class="author-location">United Kingdom</div>
+                </div>
+              </div>
+              
+              <div class="testimonial-card">
+                <div class="testimonial-content">
+                  <p>"As a solo traveler, the local tips were invaluable. I felt confident exploring even the less touristy areas of Mumbai."</p>
+                </div>
+                <div class="testimonial-author">
+                  <div class="author-name">Elena K.</div>
+                  <div class="author-location">Germany</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cta-section">
+            <h2>Ready to Explore Mumbai?</h2>
+            <p>Your personalized journey through the city of dreams starts here.</p>
+            <div class="cta-buttons">
+              <a href="#neighborhoods" class="btn primary-btn" id="browse-neighborhoods-btn">
+                <i class="fas fa-map-marked-alt"></i> Browse Neighborhoods
+              </a>
+              <a href="#map" class="btn secondary-btn" id="open-map-btn">
+                <i class="fas fa-map"></i> Open Interactive Map
+              </a>
             </div>
           </div>
         </div>
-
-        <!-- Subplaces Tab -->
-        <div id="subplaces" class="tab-content">
-          <div class="location-header">
-            <h2>Explore Mumbai's Neighborhoods</h2>
-            <p>Select a location to discover its attractions, cuisine, and culture</p>
-          </div>
-          
-          <!-- Location Tabs Navigation -->
-          <div class="location-tabs">
-            <div class="location-tab active" data-location="colaba">
-              <i class="fas fa-landmark"></i>
-              <span>Colaba</span>
-            </div>
-            <div class="location-tab" data-location="bandra">
-              <i class="fas fa-store"></i>
-              <span>Bandra</span>
-            </div>
-            <div class="location-tab" data-location="juhu">
-              <i class="fas fa-umbrella-beach"></i>
-              <span>Juhu</span>
-            </div>
-            <div class="location-tab" data-location="andheri">
-              <i class="fas fa-shopping-bag"></i>
-              <span>Andheri</span>
-            </div>
-            <div class="location-tab" data-location="dadar">
-              <i class="fas fa-utensils"></i>
-              <span>Dadar</span>
-            </div>
-            <div class="location-tab" data-location="lowerparel">
-              <i class="fas fa-building"></i>
-              <span>Lower Parel</span>
-            </div>
-            <div class="location-tab" data-location="santacruz">
-              <i class="fas fa-store-alt"></i>
-              <span>Santacruz</span>
-            </div>
-            <div class="location-tab" data-location="goregaon">
-              <i class="fas fa-leaf"></i>
-              <span>Goregaon</span>
-            </div>
-            <div class="location-tab" data-location="chembur">
-              <i class="fas fa-theater-masks"></i>
-              <span>Chembur</span>
-            </div>
-            <div class="location-tab" data-location="powai">
-              <i class="fas fa-water"></i>
-              <span>Powai</span>
+        
+        <!-- Neighborhoods Tab -->
+        <div id="neighborhoods" class="tab-container">
+          <div class="dashboard-header">
+            <div class="hero-banner neighborhood-banner">
+              <h1>Explore Mumbai Neighborhoods</h1>
+              <p>Discover the diverse and vibrant neighborhoods that make Mumbai the city of dreams</p>
             </div>
           </div>
-          
-          <!-- Location Content Sections -->
-          <div class="location-content-container">
-            <!-- Colaba Content -->
-            <div class="location-content active" id="colaba-content">
-              <div class="location-banner">
-                <img src="/static/img/colaba.jpg" alt="Colaba">
-                <div class="location-banner-overlay">
-                  <h2>Colaba</h2>
-                  <p>South Mumbai's historic district with colonial heritage and iconic landmarks</p>
-                </div>
-              </div>
-              
-              <div class="location-details">
-                <div class="location-section">
-                  <h3><i class="fas fa-info-circle"></i> About</h3>
-                  <p>Colaba is the cultural and historical heart of South Mumbai, where colonial-era architecture meets vibrant city life. This peninsular district is flanked by the Arabian Sea and dotted with some of Mumbai's most recognizable landmarks. With its rich heritage buildings, art galleries, and bustling markets, Colaba offers a perfect blend of historical significance and contemporary energy that makes it a must-visit for any traveler.</p>
-                </div>
-                
-                <div class="location-section">
-                  <h3><i class="fas fa-utensils"></i> Where to Eat</h3>
-                  <div class="recommendation-cards">
-                    <div class="recommendation-card clickable" data-place="Leopold Cafe" data-category="eat" data-neighborhood="Colaba" data-address="Shahid Bhagat Singh Road, Colaba Causeway" data-map="https://maps.google.com/?q=Leopold+Cafe+Mumbai">
-                      <div class="card-image">
-                        <img src="/static/img/places/leopold-cafe.jpg" alt="Leopold Cafe">
-                        <div class="card-overlay">
-                          <span class="view-details">View Details</span>
-                        </div>
-                      </div>
-                      <h4>Leopold Cafe</h4>
-                      <p>Iconic century-old establishment with a storied history, serving continental, Chinese and Indian cuisines. A favorite among locals and tourists alike since 1871, and immortalized in Gregory David Roberts' novel "Shantaram."</p>
-                      <div class="card-footer">
-                        <span class="place-tag">Restaurant</span>
-                        <span class="featured-badge">Featured</span>
-                      </div>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>Bademiya</h4>
-                      <p>Legendary late-night street food institution known for its succulent kebabs and rolls. Located in a small lane behind the Taj Mahal Hotel, it's been satisfying Mumbai's night owls since 1946.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>Cafe Mondegar</h4>
-                      <p>Popular bohemian cafe adorned with Mario Miranda's whimsical artwork, renowned for its chilled beer, jukebox, and hearty international cuisine that's been attracting patrons for generations.</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="location-section">
-                  <h3><i class="fas fa-camera"></i> What to See</h3>
-                  <div class="recommendation-cards">
-                    <div class="recommendation-card">
-                      <h4>Gateway of India</h4>
-                      <p>Majestic archway built during the British Raj to commemorate the visit of King George V and Queen Mary in 1911. This iconic monument overlooks the Arabian Sea and stands as a symbol of Mumbai's colonial past.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>Taj Mahal Palace</h4>
-                      <p>Magnificent heritage five-star hotel built in 1903, featuring a blend of Islamic and Renaissance architectural styles. This landmark of Indian hospitality has hosted royalty, dignitaries, and celebrities for over a century.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>Jehangir Art Gallery</h4>
-                      <p>Premier art space showcasing contemporary Indian paintings and sculptures. Located in the Kala Ghoda art district, it's a cultural hub where emerging and established artists display their creative works.</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="location-section">
-                  <h3><i class="fas fa-map-pin"></i> Local Tips</h3>
-                  <ul class="tips-list">
-                    <li>Join the "Colaba Heritage Walk" organized by local historians to discover hidden colonial gems</li>
-                    <li>Visit the Gateway of India during sunrise to avoid crowds and capture stunning photographs</li>
-                    <li>Bargain confidently at Colaba Causeway shops – start at 50% of the quoted price</li>
-                    <li>Take the ferry from Gateway to explore the ancient Elephanta Caves, a UNESCO World Heritage site</li>
-                    <li>Explore the Kala Ghoda art district on Sundays when the street transforms into an open-air exhibition</li>
-                    <li>Try the famous "Bombay Sandwich" from street vendors along the Causeway for an authentic local snack</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Dadar Content -->
-            <div class="location-content" id="dadar-content">
-              <div class="location-banner">
-                <img src="/static/img/dadar.jpg" alt="Dadar">
-                <div class="location-banner-overlay">
-                  <h2>Dadar</h2>
-                  <p>The authentic heart of Mumbai with bustling markets and traditional culture</p>
-                </div>
-              </div>
-              
-              <div class="location-details">
-                <div class="location-section">
-                  <h3><i class="fas fa-info-circle"></i> About</h3>
-                  <p>Dadar represents the true pulse of Mumbai – a neighborhood where tradition meets everyday urban life. Located at the geographical center of the city, it serves as a crucial junction connecting South Mumbai to the suburbs. With its famous flower market, traditional shopping streets, and strong Maharashtrian cultural influences, Dadar offers visitors an authentic glimpse into local Mumbai life away from typical tourist circuits.</p>
-                </div>
-                
-                <div class="location-section">
-                  <h3><i class="fas fa-utensils"></i> Where to Eat</h3>
-                  <div class="recommendation-cards">
-                    <div class="recommendation-card">
-                      <h4>Prakash</h4>
-                      <p>Iconic no-frills eatery serving authentic Maharashtrian breakfast and snacks like misal pav, thalipeeth, and kothimbir vadi since 1947. A culinary institution that locals swear by.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>Aaswad</h4>
-                      <p>Award-winning restaurant famous for its missal pav (which won the "World's Tastiest Vegetarian Dish" award) and other traditional Maharashtrian delicacies served in a simple, homely setting.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>Cafe Madras</h4>
-                      <p>Beloved South Indian restaurant established in 1940, known for its crispy dosas, fluffy idlis, and filter coffee. Expect queues at peak hours – a testament to its enduring popularity.</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="location-section">
-                  <h3><i class="fas fa-camera"></i> What to See</h3>
-                  <div class="recommendation-cards">
-                    <div class="recommendation-card">
-                      <h4>Dadar Flower Market</h4>
-                      <p>One of Asia's largest flower markets, this colorful spectacle comes alive in the early morning hours with vendors selling everything from marigolds to exotic blooms. The market supplies flowers to the entire city.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>Shivaji Park</h4>
-                      <p>Historic recreational ground spanning 112,937 square meters, significant as both a cricket nursery that produced legends like Sachin Tendulkar and as a venue for political and cultural gatherings.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>Siddhivinayak Temple</h4>
-                      <p>One of Mumbai's most revered temples dedicated to Lord Ganesha, attracting devotees from all walks of life, including celebrities and politicians who seek blessings before important ventures.</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="location-section">
-                  <h3><i class="fas fa-map-pin"></i> Local Tips</h3>
-                  <ul class="tips-list">
-                    <li>Visit Dadar Flower Market between 4-6 AM for the most vibrant experience and freshest blooms</li>
-                    <li>Explore Dadar West's "Khaowali Galli" (Eating Street) for authentic street food delicacies</li>
-                    <li>Shop at Dadar Market for traditional Indian clothing at reasonable prices</li>
-                    <li>Visit Siddhivinayak Temple early on Tuesday mornings to avoid the massive crowds</li>
-                    <li>Take a morning walk in Shivaji Park to watch cricket enthusiasts practicing at dawn</li>
-                    <li>Try the special Maharashtrian thali at Mama Kane for a comprehensive taste of regional cuisine</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Bandra Content -->
-            <div class="location-content" id="bandra-content">
-              <div class="location-banner">
-                <img src="/static/img/bandra.jpg" alt="Bandra">
-                <div class="location-banner-overlay">
-                  <h2>Bandra</h2>
-                  <p>The trendy "Queen of Suburbs" with vibrant street art and cosmopolitan culture</p>
-                </div>
-              </div>
-              
-              <div class="location-details">
-                <div class="location-section">
-                  <h3><i class="fas fa-info-circle"></i> About</h3>
-                  <p>Bandra embodies Mumbai's contemporary cool while preserving pockets of old-world charm. Known as the "Queen of Suburbs," this upscale coastal neighborhood seamlessly blends colonial-era architecture, heritage bungalows, and Portuguese influences with modern cafes, boutiques, and vibrant street art. Home to numerous Bollywood celebrities, trendy restaurants, and fashionable nightlife venues, Bandra represents Mumbai's evolving cosmopolitan identity.</p>
-                </div>
-                
-                <div class="location-section">
-                  <h3><i class="fas fa-utensils"></i> Where to Eat</h3>
-                  <div class="recommendation-cards">
-                    <div class="recommendation-card">
-                      <h4>Pali Village Café</h4>
-                      <p>Rustic European-style cafe with distressed walls and vintage decor, serving artisanal pizzas, handmade pastas, and seasonal specialties in a romantic atmosphere that feels worlds away from Mumbai's bustle.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>Candies</h4>
-                      <p>Beloved local institution spread across multiple levels of a charming bungalow, offering an eclectic menu of sandwiches, pastries, and comfort food that has made it a Bandra landmark for decades.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>O Pedro</h4>
-                      <p>Vibrant Goan restaurant celebrating the Portuguese-influenced cuisine of India's sunshine state with innovative cocktails, seafood specialties, and a lively ambiance that captures Goa's laid-back spirit.</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="location-section">
-                  <h3><i class="fas fa-camera"></i> What to See</h3>
-                  <div class="recommendation-cards">
-                    <div class="recommendation-card">
-                      <h4>Bandstand Promenade</h4>
-                      <p>Scenic seaside walkway stretching 1.2 kilometers along the Arabian Sea, offering breathtaking views of the Bandra-Worli Sea Link and Mumbai's skyline. A popular spot for joggers, sunset watchers, and celebrity home spotting.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>Bandra Street Art</h4>
-                      <p>Vibrant open-air gallery of murals and graffiti by local and international artists decorating the walls of Chapel Road and Veronica Street. These colorful expressions have transformed Bandra into Mumbai's most Instagram-worthy neighborhood.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>Mount Mary Church</h4>
-                      <p>Historic Roman Catholic basilica dating back to the 16th century, perched atop a hill with beautiful architecture and peaceful surroundings. The annual Bandra Fair held here in September attracts thousands of devotees.</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="location-section">
-                  <h3><i class="fas fa-map-pin"></i> Local Tips</h3>
-                  <ul class="tips-list">
-                    <li>Explore the preserved Portuguese-style cottages and narrow lanes of Ranwar Village</li>
-                    <li>Visit Carter Road in the evening for the best street food and celebrity spotting</li>
-                    <li>Shop at the boutique stores on Linking Road and Hill Road for fashion bargains</li>
-                    <li>Take a guided street art walk to discover hidden murals and the stories behind them</li>
-                    <li>Visit during the Celebrate Bandra festival (November) for cultural performances</li>
-                    <li>Try the East Indian bottle masala dishes at Snowflake Restaurant for authentic local cuisine</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Lower Parel Content -->
-            <div class="location-content" id="lowerparel-content">
-              <div class="location-banner">
-                <img src="/static/img/lowerparel.jpg" alt="Lower Parel">
-                <div class="location-banner-overlay">
-                  <h2>Lower Parel</h2>
-                  <p>A transformed industrial district now home to upscale shopping and dining</p>
-                </div>
-              </div>
-              
-              <div class="location-details">
-                <div class="location-section">
-                  <h3><i class="fas fa-info-circle"></i> About</h3>
-                  <p>Lower Parel represents Mumbai's remarkable urban transformation, having evolved from an industrial mill district to one of the city's most dynamic commercial and lifestyle hubs. The old cotton mill chimneys now stand alongside gleaming skyscrapers, luxury malls, and converted industrial spaces that house trendy restaurants and creative businesses. This neighborhood embodies Mumbai's adaptability and forward-looking spirit while preserving elements of its industrial heritage.</p>
-                </div>
-                
-                <div class="location-section">
-                  <h3><i class="fas fa-utensils"></i> Where to Eat</h3>
-                  <div class="recommendation-cards">
-                    <div class="recommendation-card">
-                      <h4>The Bombay Canteen</h4>
-                      <p>Award-winning restaurant reimagining regional Indian cuisine with contemporary techniques and seasonal ingredients. Their inventive approach to traditional recipes has revolutionized Mumbai's dining scene.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>Masque</h4>
-                      <p>Sophisticated farm-to-table restaurant offering an innovative tasting menu experience in a converted industrial space. One of Asia's 50 Best Restaurants, focusing on indigenous ingredients and modern technique.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>Indigo Deli</h4>
-                      <p>Beloved all-day dining destination known for its artisanal breads, hearty sandwiches, and comfort food classics. The perfect spot for a casual business lunch or weekend brunch with excellent coffee.</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="location-section">
-                  <h3><i class="fas fa-camera"></i> What to See</h3>
-                  <div class="recommendation-cards">
-                    <div class="recommendation-card">
-                      <h4>High Street Phoenix</h4>
-                      <p>Sprawling luxury mall complex built on the site of a former textile mill, featuring premium international brands, entertainment venues, and a diverse range of dining options. A symbol of Lower Parel's transformation.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>Todi Mills</h4>
-                      <p>Revitalized industrial complex that now houses boutique fitness studios, concept stores, art galleries, and trendy cafes. The preserved industrial architecture creates a distinctive atmosphere for modern businesses.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>Shakti Mills</h4>
-                      <p>Historic mill ruins that offer a glimpse into Mumbai's industrial past. While not officially open to visitors, the exterior view of these preserved structures provides a stark contrast to the area's modern development.</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="location-section">
-                  <h3><i class="fas fa-map-pin"></i> Local Tips</h3>
-                  <ul class="tips-list">
-                    <li>Visit Famous Studios, a historic film studio that has now become a creative events space</li>
-                    <li>Explore Laxmi Woollen Mills for independent design studios and artisanal workshops</li>
-                    <li>Attend one of the many pop-up markets or food festivals regularly held in repurposed mill spaces</li>
-                    <li>Try craft beer at one of several microbreweries in the area, like Brewbot or Doolally</li>
-                    <li>Check out the calendar at Antisocial or Bluefrog for live music performances</li>
-                    <li>Take the walking tour "From Mills to Malls" offered by local heritage organizations</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
 
-            <!-- Juhu Content -->
-            <div class="location-content" id="juhu-content">
-              <div class="location-banner">
+          <h2 class="section-title">Mumbai Neighborhoods</h2>
+          
+          <!-- Neighborhood Grid -->
+          <div class="neighborhood-grid">
+            <!-- Colaba -->
+            <div class="neighborhood-card" data-neighborhood="colaba" data-category="historic">
+              <div class="neighborhood-image">
+                <img src="/static/img/Gateway.jpg" alt="Colaba">
+                <div class="neighborhood-overlay">
+                  <button class="view-btn" data-neighborhood="colaba">Explore</button>
+                </div>
+              </div>
+              <div class="neighborhood-content">
+                <h3>Colaba</h3>
+                <p>Historic district with iconic landmarks and vibrant markets</p>
+                <div class="neighborhood-tags">
+                  <span class="tag">Historic</span>
+                  <span class="tag">Tourism</span>
+                  <span class="rating"><i class="fas fa-star"></i> 4.8</span>
+                </div>
+                <div class="neighborhood-features">
+                  <div class="feature" data-tooltip="Where to Eat" data-location="colaba" data-section="eat">
+                    <i class="fas fa-utensils"></i>
+                  </div>
+                  <div class="feature" data-tooltip="What to See" data-location="colaba" data-section="see">
+                    <i class="fas fa-camera"></i>
+                  </div>
+                  <div class="feature" data-tooltip="Local Tips" data-location="colaba" data-section="tips">
+                    <i class="fas fa-lightbulb"></i>
+                  </div>
+                </div>
+              </div>
+              </div>
+
+            <!-- Bandra -->
+            <div class="neighborhood-card" data-neighborhood="bandra" data-category="trendy">
+              <div class="neighborhood-image">
+                <img src="/static/img/Bandstand.JPG" alt="Bandra">
+                <div class="neighborhood-overlay">
+                  <button class="view-btn" data-neighborhood="bandra">Explore</button>
+                </div>
+              </div>
+              <div class="neighborhood-content">
+                <h3>Bandra</h3>
+                <p>Trendy suburb with chic cafés and boutique shopping</p>
+                <div class="neighborhood-tags">
+                  <span class="tag">Trendy</span>
+                  <span class="tag">Shopping</span>
+                  <span class="rating"><i class="fas fa-star"></i> 4.7</span>
+                </div>
+                <div class="neighborhood-features">
+                  <div class="feature" data-tooltip="Where to Eat" data-location="bandra" data-section="eat">
+                    <i class="fas fa-utensils"></i>
+                  </div>
+                  <div class="feature" data-tooltip="What to See" data-location="bandra" data-section="see">
+                    <i class="fas fa-camera"></i>
+                  </div>
+                  <div class="feature" data-tooltip="Local Tips" data-location="bandra" data-section="tips">
+                    <i class="fas fa-lightbulb"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Juhu -->
+            <div class="neighborhood-card" data-neighborhood="juhu" data-category="beach">
+              <div class="neighborhood-image">
                 <img src="/static/img/juhu.jpg" alt="Juhu">
-                <div class="location-banner-overlay">
-                  <h2>Juhu</h2>
-                  <p>Mumbai's glamorous beachfront neighborhood with strong Bollywood connections</p>
+                <div class="neighborhood-overlay">
+                  <button class="view-btn" data-neighborhood="juhu">Explore</button>
                 </div>
               </div>
-              
-              <div class="location-details">
-                <div class="location-section">
-                  <h3><i class="fas fa-info-circle"></i> About</h3>
-                  <p>Juhu is synonymous with Mumbai's glamorous side, featuring one of the city's most famous beaches along the Arabian Sea. This upscale coastal neighborhood is home to numerous Bollywood celebrities, luxury hotels, and trendy seaside restaurants. Beyond its glitzy reputation, Juhu offers visitors a perfect blend of recreational activities, cultural attractions, and some of Mumbai's most celebrated street food, making it a must-visit destination for experiencing the city's more leisurely facets.</p>
+              <div class="neighborhood-content">
+                <h3>Juhu</h3>
+                <p>Beachside area with entertainment and celebrity homes</p>
+                <div class="neighborhood-tags">
+                  <span class="tag">Beach</span>
+                  <span class="tag">Entertainment</span>
+                  <span class="rating"><i class="fas fa-star"></i> 4.6</span>
                 </div>
-                
-                <div class="location-section">
-                  <h3><i class="fas fa-utensils"></i> Where to Eat</h3>
-                  <div class="recommendation-cards">
-                    <div class="recommendation-card">
-                      <h4>Juhu Beach Food Stalls</h4>
-                      <p>Iconic beachfront food vendors serving Mumbai's famous street food delicacies like pav bhaji, gola (shaved ice dessert), and bhel puri. The tangy, spicy flavors enjoyed with sea breeze create an essential Mumbai experience.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>Prithvi Café</h4>
-                      <p>Atmospheric open-air café attached to the famous Prithvi Theatre, frequented by artists, actors, and theatre enthusiasts. Known for its Irish coffee and relaxed bohemian ambiance under a canopy of trees.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>Silver Beach Café</h4>
-                      <p>Elegant European-style café offering Mediterranean cuisine with ocean views. The white-themed interiors, extensive breakfast menu, and breezy atmosphere make it a favorite among Juhu's stylish crowd.</p>
-                    </div>
+                <div class="neighborhood-features">
+                  <div class="feature" data-tooltip="Where to Eat" data-location="juhu" data-section="eat">
+                    <i class="fas fa-utensils"></i>
                   </div>
-                </div>
-                
-                <div class="location-section">
-                  <h3><i class="fas fa-camera"></i> What to See</h3>
-                  <div class="recommendation-cards">
-                    <div class="recommendation-card">
-                      <h4>Juhu Beach</h4>
-                      <p>Sprawling 6-kilometer stretch of golden sand facing the Arabian Sea, offering magnificent sunsets, camel rides, and a carnival-like atmosphere during evenings and weekends. One of Mumbai's most vibrant public spaces.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>ISKCON Temple</h4>
-                      <p>Striking spiritual center dedicated to Lord Krishna, featuring beautiful marble interiors, intricate architecture, and peaceful gardens. The temple complex hosts cultural events and serves delicious vegetarian food.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>Prithvi Theatre</h4>
-                      <p>Legendary intimate theatre founded by Shashi Kapoor and Jennifer Kendal, showcasing quality performances and nurturing theatrical talent since 1978. The cultural landmark hosts the annual Prithvi Theatre Festival.</p>
-                    </div>
+                  <div class="feature" data-tooltip="What to See" data-location="juhu" data-section="see">
+                    <i class="fas fa-camera"></i>
                   </div>
+                  <div class="feature" data-tooltip="Local Tips" data-location="juhu" data-section="tips">
+                    <i class="fas fa-lightbulb"></i>
+                  </div>
+              </div>
+            </div>
+          </div>
+
+            <!-- Andheri -->
+            <div class="neighborhood-card" data-neighborhood="andheri" data-category="business">
+              <div class="neighborhood-image">
+                <img src="/static/img/Film City.jpg" alt="Andheri">
+                <div class="neighborhood-overlay">
+                  <button class="view-btn" data-neighborhood="andheri">Explore</button>
                 </div>
-                
-                <div class="location-section">
-                  <h3><i class="fas fa-map-pin"></i> Local Tips</h3>
-                  <ul class="tips-list">
-                    <li>Visit Juhu Beach during weekday afternoons for a more peaceful experience</li>
-                    <li>Try the pav bhaji at Sharma's and gola from the beachside vendors – true Mumbai classics</li>
-                    <li>Check out celebrity homes on Juhu Tara Road (from a respectful distance)</li>
-                    <li>Visit the ISKCON Temple during the morning aarti for a spiritual experience</li>
-                    <li>Book Prithvi Theatre tickets in advance as shows often sell out quickly</li>
-                    <li>Walk from Juhu to Versova Beach during low tide for a beautiful coastal stroll</li>
-                  </ul>
+              </div>
+              <div class="neighborhood-content">
+                <h3>Andheri</h3>
+                <p>Business hub with entertainment venues and shopping malls</p>
+                <div class="neighborhood-tags">
+                  <span class="tag">Business</span>
+                  <span class="tag">Shopping</span>
+                  <span class="rating"><i class="fas fa-star"></i> 4.4</span>
+                </div>
+                <div class="neighborhood-features">
+                  <div class="feature" data-tooltip="Where to Eat" data-location="andheri" data-section="eat">
+                    <i class="fas fa-utensils"></i>
+                  </div>
+                  <div class="feature" data-tooltip="What to See" data-location="andheri" data-section="see">
+                    <i class="fas fa-camera"></i>
+                  </div>
+                  <div class="feature" data-tooltip="Local Tips" data-location="andheri" data-section="tips">
+                    <i class="fas fa-lightbulb"></i>
+                  </div>
                 </div>
               </div>
             </div>
-
-            <!-- Santacruz Content -->
-            <div class="location-content" id="santacruz-content">
-              <div class="location-banner">
-                <img src="/static/img/santacruz.jpg" alt="Santacruz">
-                <div class="location-banner-overlay">
-                  <h2>Santacruz</h2>
-                  <p>A charming suburb balancing traditional markets with modern conveniences</p>
+            
+            <!-- Dadar -->
+            <div class="neighborhood-card" data-neighborhood="dadar" data-category="cultural">
+              <div class="neighborhood-image">
+                <img src="/static/img/Shivaji Park.jpg" alt="Dadar">
+                <div class="neighborhood-overlay">
+                  <button class="view-btn" data-neighborhood="dadar">Explore</button>
                 </div>
               </div>
-              
-              <div class="location-details">
-                <div class="location-section">
-                  <h3><i class="fas fa-info-circle"></i> About</h3>
-                  <p>Santacruz captures the essence of Mumbai's suburban charm, striking a perfect balance between traditional elements and urban conveniences. Split into East and West by the railway line, this neighborhood showcases two distinct facets of Mumbai life: the bustling, commercial East with its traditional markets and the more upscale, residential West with its tree-lined streets. Santacruz offers visitors an authentic glimpse into how everyday Mumbaikars live, work, and socialize.</p>
+              <div class="neighborhood-content">
+                <h3>Dadar</h3>
+                <p>Cultural heart with flower market and authentic street food</p>
+                <div class="neighborhood-tags">
+                  <span class="tag">Cultural</span>
+                  <span class="tag">Markets</span>
+                  <span class="rating"><i class="fas fa-star"></i> 4.5</span>
                 </div>
-                
-                <div class="location-section">
-                  <h3><i class="fas fa-utensils"></i> Where to Eat</h3>
-                  <div class="recommendation-cards">
-                    <div class="recommendation-card">
-                      <h4>Khane Khas</h4>
-                      <p>Beloved neighborhood restaurant serving authentic North Indian cuisine and Mughlai specialties. Their butter chicken and biryani have a dedicated following among locals and food enthusiasts from across Mumbai.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>Highway Gomantak</h4>
-                      <p>No-frills eatery specializing in coastal Maharashtrian cuisine, particularly seafood and sol kadhi. This hidden gem offers some of the most authentic Malvani-style fish curry and bombil fry in the city.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>Gajali Khanaval</h4>
-                      <p>Traditional Maharashtrian lunch home serving home-style thalis on banana leaves. This modest establishment attracts crowds for its authentic flavors and reasonable prices – a true local dining experience.</p>
-                    </div>
+                <div class="neighborhood-features">
+                  <div class="feature" data-tooltip="Where to Eat" data-location="dadar" data-section="eat">
+                    <i class="fas fa-utensils"></i>
                   </div>
-                </div>
-                
-                <div class="location-section">
-                  <h3><i class="fas fa-camera"></i> What to See</h3>
-                  <div class="recommendation-cards">
-                    <div class="recommendation-card">
-                      <h4>Santacruz Market</h4>
-                      <p>Vibrant local bazaar where vendors sell everything from fresh produce and spices to clothing and household goods. The bustling atmosphere and colorful displays offer an immersive experience of everyday Mumbai life.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>Juhu Yoga Circle</h4>
-                      <p>Tranquil green space where locals gather for morning yoga, meditation, and exercise. This community space showcases Mumbai's growing wellness culture and provides a peaceful respite from urban bustle.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>St. Anthony's Church</h4>
-                      <p>Historic Catholic church dating back to Portuguese times, featuring beautiful architecture and peaceful grounds. The church's feast day celebrations in June attract visitors from across Mumbai.</p>
-                    </div>
+                  <div class="feature" data-tooltip="What to See" data-location="dadar" data-section="see">
+                    <i class="fas fa-camera"></i>
                   </div>
-                </div>
-                
-                <div class="location-section">
-                  <h3><i class="fas fa-map-pin"></i> Local Tips</h3>
-                  <ul class="tips-list">
-                    <li>Explore Khira Nagar market for the best seasonal fruits and vegetables at local prices</li>
-                    <li>Visit the Milan Subway area for street shopping and budget fashion finds</li>
-                    <li>Try the famous vada pav from Dhiraj Vada Pav near the railway station</li>
-                    <li>Check out the Kalina campus of Mumbai University for its green spaces</li>
-                    <li>Shop for traditional Indian wear at the boutiques on Linking Road extension</li>
-                    <li>Join locals for an evening walk at the Juhu Yoga Circle garden for a slice of community life</li>
-                  </ul>
+                  <div class="feature" data-tooltip="Local Tips" data-location="dadar" data-section="tips">
+                    <i class="fas fa-lightbulb"></i>
+                  </div>
                 </div>
               </div>
             </div>
-
-            <!-- Andheri Content -->
-            <div class="location-content" id="andheri-content">
-              <div class="location-banner">
-                <img src="/static/img/andheri.jpg" alt="Andheri">
-                <div class="location-banner-overlay">
-                  <h2>Andheri</h2>
-                  <p>A dynamic urban hub combining commercial vibrancy with entertainment</p>
+            
+            <!-- Lower Parel -->
+            <div class="neighborhood-card" data-neighborhood="lowerparel" data-category="modern">
+              <div class="neighborhood-image">
+                <img src="/static/img/Lower Parel.jpg" alt="Lower Parel">
+                <div class="neighborhood-overlay">
+                  <button class="view-btn" data-neighborhood="lowerparel">Explore</button>
                 </div>
               </div>
-              
-              <div class="location-details">
-                <div class="location-section">
-                  <h3><i class="fas fa-info-circle"></i> About</h3>
-                  <p>Andheri epitomizes Mumbai's dynamic urban expansion as one of the city's largest and most diverse neighborhoods. Divided into East and West by the railway line, Andheri East has evolved into a major commercial center with corporate parks and the international airport, while Andheri West offers a mix of residential areas, entertainment venues, and shopping districts. With its excellent connectivity, culinary diversity, and round-the-clock energy, Andheri provides visitors with a comprehensive experience of contemporary Mumbai life.</p>
+              <div class="neighborhood-content">
+                <h3>Lower Parel</h3>
+                <p>Modern commercial hub with upscale malls and restaurants</p>
+                <div class="neighborhood-tags">
+                  <span class="tag">Modern</span>
+                  <span class="tag">Dining</span>
+                  <span class="rating"><i class="fas fa-star"></i> 4.5</span>
                 </div>
-                
-                <div class="location-section">
-                  <h3><i class="fas fa-utensils"></i> Where to Eat</h3>
-                  <div class="recommendation-cards">
-                    <div class="recommendation-card">
-                      <h4>Soda Bottle Opener Wala</h4>
-                      <p>Charming restaurant celebrating Parsi cuisine and Irani cafe culture with vintage decor. Signature dishes like berry pulao, dhansak, and bun maska paired with chai offer a taste of Mumbai's diminishing Parsi heritage.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>Pa Pa Ya</h4>
-                      <p>Modern Asian bistro serving innovative interpretations of pan-Asian cuisine with molecular gastronomy techniques. Their sushi matrix, dim sum platters, and dramatic presentations make for a memorable dining experience.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>Sasural</h4>
-                      <p>Popular North Indian restaurant known for its robust Punjabi flavors and generous portions. Their dal makhani, butter chicken, and tandoori specialties make it a favorite for family dining and group celebrations.</p>
-                    </div>
+                <div class="neighborhood-features">
+                  <div class="feature" data-tooltip="Where to Eat" data-location="lowerparel" data-section="eat">
+                    <i class="fas fa-utensils"></i>
                   </div>
-                </div>
-                
-                <div class="location-section">
-                  <h3><i class="fas fa-camera"></i> What to See</h3>
-                  <div class="recommendation-cards">
-                    <div class="recommendation-card">
-                      <h4>Versova Beach</h4>
-                      <p>Increasingly popular coastal stretch known for its successful citizen-led cleanup initiative. Now a cleaner, more accessible beach with a local atmosphere and fewer crowds than Juhu, perfect for sunset walks.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>Fun Republic</h4>
-                      <p>Entertainment complex featuring multiplexes, shopping outlets, and dining options. This sprawling venue represents the modern entertainment culture that has made Andheri a leisure destination for Mumbai residents.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>Lokhandwala Complex</h4>
-                      <p>Bustling shopping district with a mix of high-street brands, local boutiques, and vibrant street shopping. The area also hosts numerous cafes and restaurants, making it a complete outing destination.</p>
-                    </div>
+                  <div class="feature" data-tooltip="What to See" data-location="lowerparel" data-section="see">
+                    <i class="fas fa-camera"></i>
                   </div>
-                </div>
-                
-                <div class="location-section">
-                  <h3><i class="fas fa-map-pin"></i> Local Tips</h3>
-                  <ul class="tips-list">
-                    <li>Explore the street shopping at Lokhandwala Market for fashion bargains and accessories</li>
-                    <li>Visit Versova village to see the fishing community and buy fresh seafood</li>
-                    <li>Take advantage of the metro line to avoid traffic congestion between key areas</li>
-                    <li>Check out Gilbert Hill, a 66-million-year-old monolith column of black basalt rock</li>
-                    <li>Try the chaat and street food options at Juhu Lane in Andheri West</li>
-                    <li>If you're a cricket fan, visit the Andheri Sports Complex during local tournament season</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            <!-- Goregaon Content -->
-            <div class="location-content" id="goregaon-content">
-              <div class="location-banner">
-                <img src="/static/img/goregaon.jpg" alt="Goregaon">
-                <div class="location-banner-overlay">
-                  <h2>Goregaon</h2>
-                  <p>A green suburb with film studios and a perfect balance of nature and urban life</p>
-                </div>
-              </div>
-              
-              <div class="location-details">
-                <div class="location-section">
-                  <h3><i class="fas fa-info-circle"></i> About</h3>
-                  <p>Goregaon represents Mumbai's more balanced side, where urban development coexists with substantial green spaces. This western suburb has gained prominence for housing Film City, the heart of Mumbai's entertainment industry, alongside the expansive Aarey Colony, one of the city's largest green lungs. The neighborhood offers visitors a chance to experience Mumbai's cinematic heritage, explore natural spaces, and witness a rapidly developing suburb that balances residential complexes with commercial centers.</p>
-                </div>
-                
-                <div class="location-section">
-                  <h3><i class="fas fa-utensils"></i> Where to Eat</h3>
-                  <div class="recommendation-cards">
-                    <div class="recommendation-card">
-                      <h4>CinCin</h4>
-                      <p>Sophisticated Italian restaurant with a warm, inviting atmosphere, specializing in handmade pasta and wood-fired pizzas. Their extensive wine selection and authentic flavors have earned critical acclaim.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>Goila Butter Chicken</h4>
-                      <p>Specialized eatery by celebrity chef Saransh Goila, famous for its signature butter chicken with a smoky twist. This dish has developed a cult following among Mumbai's food enthusiasts.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>Aarey Garden Cafe</h4>
-                      <p>Rustic outdoor cafe set amidst the greenery of Aarey Colony, serving simple, fresh fare including milk products from the dairy. A peaceful setting that feels removed from Mumbai's urban intensity.</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="location-section">
-                  <h3><i class="fas fa-camera"></i> What to See</h3>
-                  <div class="recommendation-cards">
-                    <div class="recommendation-card">
-                      <h4>Film City</h4>
-                      <p>Sprawling 500-acre studio complex where numerous Bollywood films and television shows are shot daily. Guided tours offer behind-the-scenes glimpses into sets, shooting locations, and the filmmaking process.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>Aarey Colony</h4>
-                      <p>Vast green expanse spanning 16 square kilometers, home to diverse flora, fauna, and tribal communities. Despite urban encroachment, it remains one of Mumbai's most important ecological zones with walking trails and picnic spots.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>Oberoi Mall</h4>
-                      <p>Premium shopping destination featuring international brands, entertainment options, and diverse dining. This modern mall represents the newer face of Goregaon as a self-contained suburb with upscale amenities.</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="location-section">
-                  <h3><i class="fas fa-map-pin"></i> Local Tips</h3>
-                  <ul class="tips-list">
-                    <li>Book a Film City tour in advance through Maharashtra Tourism (MTDC) for the full experience</li>
-                    <li>Visit the Chhota Kashmir boating lake in Aarey Colony for a peaceful retreat</li>
-                    <li>Try the fresh milk and milk products at the Aarey Milk Colony outlet</li>
-                    <li>Explore the Pawan Hans helicopter services for aerial tours of Mumbai (bookable in advance)</li>
-                    <li>Check out the Royal Palms complex for its golf course and recreational facilities</li>
-                    <li>Visit during winter months to enjoy outdoor activities in the green spaces comfortably</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            <!-- Chembur Content -->
-            <div class="location-content" id="chembur-content">
-              <div class="location-banner">
-                <img src="/static/img/chembur.jpg" alt="Chembur">
-                <div class="location-banner-overlay">
-                  <h2>Chembur</h2>
-                  <p>An emerging cultural melting pot with rich culinary diversity</p>
-                </div>
-              </div>
-              
-              <div class="location-details">
-                <div class="location-section">
-                  <h3><i class="fas fa-info-circle"></i> About</h3>
-                  <p>Chembur has transformed from an industrial suburb to an emerging cultural hub that perfectly captures Mumbai's diversity. Originally developed to house refugees after partition, the neighborhood now features a fascinating mix of communities, each contributing to its unique character. With improved connectivity through the monorail and Eastern Freeway, Chembur has become more accessible, allowing visitors to explore its distinct food scene, religious landmarks, and evolving urban landscape that bridges Mumbai's past and future.</p>
-                </div>
-                
-                <div class="location-section">
-                  <h3><i class="fas fa-utensils"></i> Where to Eat</h3>
-                  <div class="recommendation-cards">
-                    <div class="recommendation-card">
-                      <h4>Jhama</h4>
-                      <p>Legendary sweetshop and snack destination established in 1960, famous for its Bengali sweets, particularly rasgulla and sandesh. Their singara (Bengali samosa) and kachori have a dedicated following across Mumbai.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>Sion Lunch Home</h4>
-                      <p>Authentic Mangalorean seafood restaurant serving coastal delicacies like kane (ladyfish) fry, prawn ghee roast, and neer dosa. Their fresh catch and traditional preparation methods attract seafood lovers from across the city.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>Persian Darbar</h4>
-                      <p>Popular establishment known for its Mughlai cuisine and generous portions. Their signature dishes include succulent kebabs, rich biryanis, and the famous Persian-style chicken that has earned them multiple locations across Mumbai.</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="location-section">
-                  <h3><i class="fas fa-camera"></i> What to See</h3>
-                  <div class="recommendation-cards">
-                    <div class="recommendation-card">
-                      <h4>Diamond Garden</h4>
-                      <p>Well-maintained public park spanning 25,000 square meters, featuring walking paths, recreational areas, and a vibrant atmosphere. The park serves as a community hub, especially during evenings and weekends.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>Fine Arts Cultural Centre</h4>
-                      <p>Local cultural institution hosting art exhibitions, musical performances, and community events. The center plays an important role in preserving and promoting diverse cultural traditions in the area.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>Chembur Camp</h4>
-                      <p>Historic area developed to resettle refugees post-partition, now a vibrant commercial hub with a distinctive Sindhi influence. The precinct offers a glimpse into an important chapter of Mumbai's multicultural history.</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="location-section">
-                  <h3><i class="fas fa-map-pin"></i> Local Tips</h3>
-                  <ul class="tips-list">
-                    <li>Try the famous Sindhi curry and aloo tuk at the small eateries in Chembur Camp</li>
-                    <li>Visit Diamond Garden in the evening when locals gather for walks and social activities</li>
-                    <li>Explore the RK Studios area, once a landmark of Indian cinema (though now redeveloped)</li>
-                    <li>Take the monorail for unique elevated views of the eastern suburbs</li>
-                    <li>Shop for Bengali sweets at Jhama during Durga Puja season for special festival treats</li>
-                    <li>Check out the Chembur market for local shopping and authentic street food</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            <!-- Powai Content -->
-            <div class="location-content" id="powai-content">
-              <div class="location-banner">
-                <img src="/static/img/powai.jpg" alt="Powai">
-                <div class="location-banner-overlay">
-                  <h2>Powai</h2>
-                  <p>A modern lakeside suburb with prestigious institutions and cosmopolitan atmosphere</p>
-                </div>
-              </div>
-              
-              <div class="location-details">
-                <div class="location-section">
-                  <h3><i class="fas fa-info-circle"></i> About</h3>
-                  <p>Powai represents Mumbai's newer, planned development, centered around the picturesque Powai Lake and anchored by the prestigious Indian Institute of Technology (IIT). This upscale neighborhood has rapidly evolved into a self-contained mini-city with high-rise luxury apartments, technology parks, and a cosmopolitan population of professionals. With its scenic waterfront, excellent infrastructure, and vibrant dining scene, Powai offers visitors a glimpse of Mumbai's more organized, contemporary side that contrasts with the city's typically chaotic urban landscape.</p>
-                </div>
-                
-                <div class="location-section">
-                  <h3><i class="fas fa-utensils"></i> Where to Eat</h3>
-                  <div class="recommendation-cards">
-                    <div class="recommendation-card">
-                      <h4>Bayview Cafe</h4>
-                      <p>Scenic lakeside restaurant offering diverse cuisine with stunning views of Powai Lake. The al fresco dining area is particularly popular during evenings, when the setting sun casts a golden glow over the water.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>The Yoga House</h4>
-                      <p>Health-focused cafe serving nutritious, organic meals and smoothies in a serene environment. Their sustainable approach to food and commitment to wellness reflects Powai's progressive mindset.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>Desirous</h4>
-                      <p>Contemporary Indian fine dining restaurant exploring regional cuisines with modern presentation. Their tasting menus showcase forgotten recipes and indigenous ingredients reimagined for sophisticated palates.</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="location-section">
-                  <h3><i class="fas fa-camera"></i> What to See</h3>
-                  <div class="recommendation-cards">
-                    <div class="recommendation-card">
-                      <h4>Powai Lake</h4>
-                      <p>Artificial lake covering 210 hectares, created in 1891 during British rule. Now a scenic recreational spot surrounded by walking paths, the lake supports diverse birdlife and offers boating activities in designated areas.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>IIT Bombay Campus</h4>
-                      <p>Sprawling 550-acre campus of India's premier technology institute, featuring beautiful green spaces, architectural landmarks, and a vibrant academic atmosphere. Visitors can explore parts of the campus with prior permission.</p>
-                    </div>
-                    <div class="recommendation-card">
-                      <h4>Hiranandani Gardens</h4>
-                      <p>Meticulously planned township with neo-classical architecture, wide boulevards, and European-inspired aesthetics. This distinctive neighborhood represents urban India's ambitious vision for modern living spaces.</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="location-section">
-                  <h3><i class="fas fa-map-pin"></i> Local Tips</h3>
-                  <ul class="tips-list">
-                    <li>Take an early morning walk around Powai Lake to spot various bird species</li>
-                    <li>Visit the Galleria shopping complex for boutique stores and casual dining</li>
-                    <li>Explore the street food options outside IIT Bombay's main gate</li>
-                    <li>Check out the Central Avenue of Hiranandani Gardens for its architectural beauty</li>
-                    <li>Join the weekend farmers market at Hiranandani for organic produce and artisanal goods</li>
-                    <li>Try paddleboating on Powai Lake for unique views of the surrounding landscape</li>
-                  </ul>
-                </div>
+                  <div class="feature" data-tooltip="Local Tips" data-location="lowerparel" data-section="tips">
+                    <i class="fas fa-lightbulb"></i>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Location Tab -->
-        <div id="location" class="tab-content">
-          <h2>Explore by Location</h2>
-          <div id="map" class="map-container"></div>
-          <div class="location-filters">
-            <select id="place-type">
-              <option value="">Select place type</option>
-              <option value="restaurant">Restaurants</option>
-              <option value="tourist_attraction">Attractions</option>
-              <option value="shopping_mall">Shopping</option>
-              <option value="hotel">Hotels</option>
-            </select>
-            <button id="search-places" class="btn">Search Places</button>
-          </div>
-          <div id="place-results" class="place-results"></div>
-        </div>
+            <!-- Santacruz -->
+            <div class="neighborhood-card" data-neighborhood="santacruz" data-category="residential">
+              <div class="neighborhood-image">
+                <img src="/static/img/juhu activities.jpg" alt="Santacruz">
+                <div class="neighborhood-overlay">
+                  <button class="view-btn" data-neighborhood="santacruz">Explore</button>
+                </div>
+              </div>
+              <div class="neighborhood-content">
+                <h3>Santacruz</h3>
+                <p>Upscale residential area with parks and shopping options</p>
+                <div class="neighborhood-tags">
+                  <span class="tag">Residential</span>
+                  <span class="tag">Parks</span>
+                  <span class="rating"><i class="fas fa-star"></i> 4.3</span>
+                </div>
+                <div class="neighborhood-features">
+                  <div class="feature" data-tooltip="Where to Eat" data-location="santacruz" data-section="eat">
+                    <i class="fas fa-utensils"></i>
+                  </div>
+                  <div class="feature" data-tooltip="What to See" data-location="santacruz" data-section="see">
+                    <i class="fas fa-camera"></i>
+                  </div>
+                  <div class="feature" data-tooltip="Local Tips" data-location="santacruz" data-section="tips">
+                    <i class="fas fa-lightbulb"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
 
+            <!-- Goregaon -->
+            <div class="neighborhood-card" data-neighborhood="goregaon" data-category="entertainment">
+              <div class="neighborhood-image">
+                <img src="/static/img/andheri shopping.jpg" alt="Goregaon">
+                <div class="neighborhood-overlay">
+                  <button class="view-btn" data-neighborhood="goregaon">Explore</button>
+                </div>
+              </div>
+              <div class="neighborhood-content">
+                <h3>Goregaon</h3>
+                <p>Entertainment district with film city and nature parks</p>
+                <div class="neighborhood-tags">
+                  <span class="tag">Entertainment</span>
+                  <span class="tag">Nature</span>
+                  <span class="rating"><i class="fas fa-star"></i> 4.2</span>
+                </div>
+                <div class="neighborhood-features">
+                  <div class="feature" data-tooltip="Where to Eat" data-location="goregaon" data-section="eat">
+                    <i class="fas fa-utensils"></i>
+                  </div>
+                  <div class="feature" data-tooltip="What to See" data-location="goregaon" data-section="see">
+                    <i class="fas fa-camera"></i>
+                  </div>
+                  <div class="feature" data-tooltip="Local Tips" data-location="goregaon" data-section="tips">
+                    <i class="fas fa-lightbulb"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Chembur -->
+            <div class="neighborhood-card" data-neighborhood="chembur" data-category="residential">
+              <div class="neighborhood-image">
+                <img src="/static/img/mumbai street scenes.jpg" alt="Chembur">
+                <div class="neighborhood-overlay">
+                  <button class="view-btn" data-neighborhood="chembur">Explore</button>
+                </div>
+              </div>
+              <div class="neighborhood-content">
+                <h3>Chembur</h3>
+                <p>Residential neighborhood known for incredible street food</p>
+                <div class="neighborhood-tags">
+                  <span class="tag">Residential</span>
+                  <span class="tag">Food</span>
+                  <span class="rating"><i class="fas fa-star"></i> 4.2</span>
+                </div>
+                <div class="neighborhood-features">
+                  <div class="feature" data-tooltip="Where to Eat" data-location="chembur" data-section="eat">
+                    <i class="fas fa-utensils"></i>
+                  </div>
+                  <div class="feature" data-tooltip="What to See" data-location="chembur" data-section="see">
+                    <i class="fas fa-camera"></i>
+                  </div>
+                  <div class="feature" data-tooltip="Local Tips" data-location="chembur" data-section="tips">
+                    <i class="fas fa-lightbulb"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Powai -->
+            <div class="neighborhood-card" data-neighborhood="powai" data-category="modern">
+              <div class="neighborhood-image">
+                <img src="/static/img/mumbai skylines.jpg" alt="Powai">
+                <div class="neighborhood-overlay">
+                  <button class="view-btn" data-neighborhood="powai">Explore</button>
+                </div>
+              </div>
+              <div class="neighborhood-content">
+                <h3>Powai</h3>
+                <p>Modern tech hub with lakeside views and premium lifestyle</p>
+                <div class="neighborhood-tags">
+                  <span class="tag">Modern</span>
+                  <span class="tag">Lake</span>
+                  <span class="rating"><i class="fas fa-star"></i> 4.4</span>
+                </div>
+                <div class="neighborhood-features">
+                  <div class="feature" data-tooltip="Where to Eat" data-location="powai" data-section="eat">
+                    <i class="fas fa-utensils"></i>
+                  </div>
+                  <div class="feature" data-tooltip="What to See" data-location="powai" data-section="see">
+                    <i class="fas fa-camera"></i>
+                  </div>
+                  <div class="feature" data-tooltip="Local Tips" data-location="powai" data-section="tips">
+                    <i class="fas fa-lightbulb"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Neighborhood modals have been replaced with dedicated HTML pages for each neighborhood -->
+          <!-- The HTML for each neighborhood is available at /static/[neighborhood].html -->
+        </div>
+        
         <!-- Chat Tab -->
-        <div id="chat" class="tab-content">
+        <div id="chat" class="tab-container">
           <div class="chat-container">
-            <h2>WeTravel Mumbai AI Assistant</h2>
-            <div class="chat-intro">
-              <div class="system-message">
+            <div class="chat-header">
+              <div class="chat-header-icon">
                 <i class="fas fa-robot"></i>
-                <p>Hi, I'm your Mumbai trip buddy! Ask me anything about attractions, transportation, food, or local tips.</p>
               </div>
-              <div class="quick-replies">
-                <button class="quick-reply-chip" data-message="Top attractions near me">Top attractions near me</button>
-                <button class="quick-reply-chip" data-message="Best time to visit Colaba">Best time to visit Colaba</button>
-                <button class="quick-reply-chip" data-message="Where to eat in Bandra?">Where to eat in Bandra?</button>
-                <button class="quick-reply-chip" data-message="How to get from airport to city center">Airport to city center</button>
+              <div>
+                <h2>Mumbai Travel Assistant</h2>
+                <p>Ask me anything about Mumbai!</p>
               </div>
             </div>
-            <div id="messages"></div>
-            <div id="user-input">
-              <input
-                type="text"
-                id="input-message"
-                placeholder="Type your message here..."
-              />
-              <button id="send-button">Send</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Itinerary Planner Tab -->
-        <div id="itinerary" class="tab-content">
-          <div class="dashboard-header">
-            <h2>Your Personalized Travel Plan</h2>
-            <p class="dashboard-subtitle">Create and manage your Mumbai adventure</p>
-          </div>
-          
-          <div class="itinerary-container">
-            <div class="itinerary-sidebar">
-              <div class="itinerary-controls">
-                <button class="generate-plan-btn"><i class="fas fa-magic"></i> Generate Plan</button>
-                <div class="plan-filters">
-                  <select id="plan-duration">
-                    <option value="3">3 Days</option>
-                    <option value="5">5 Days</option>
-                    <option value="7">7 Days</option>
-                  </select>
-                  <select id="plan-interest">
-                    <option value="balanced">Balanced</option>
-                    <option value="culture">Culture & History</option>
-                    <option value="food">Food & Culinary</option>
-                    <option value="adventure">Adventure</option>
-                  </select>
+            <div id="messages" class="chat-body">
+              <!-- Default message that will show even if JS fails -->
+              <div class="message message-assistant">
+                <div class="assistant-avatar">
+                  <img src="/static/img/assistant-avatar.svg" alt="Assistant">
                 </div>
-              </div>
-              <div class="saved-plans">
-                <h3>Saved Plans</h3>
-                <ul>
-                  <li class="active">Mumbai Highlights (3 Days)</li>
-                  <li>Cultural Deep Dive (5 Days)</li>
-                  <li>Foodie Tour (2 Days)</li>
-                </ul>
-              </div>
-            </div>
-            
-            <div class="itinerary-main">
-              <div class="itinerary-header">
-                <h3>Mumbai Highlights (3 Days)</h3>
-                <div class="itinerary-actions">
-                  <button class="btn-outline"><i class="fas fa-download"></i> Export</button>
-                  <button class="btn-outline"><i class="fas fa-share-alt"></i> Share</button>
-                </div>
-              </div>
-              
-              <div class="itinerary-days">
-                <div class="itinerary-day">
-                  <div class="day-header">
-                    <h4>Day 1: South Mumbai</h4>
-                    <span class="day-date">Suggested: 6 hours</span>
-                  </div>
-                  <div class="itinerary-items">
-                    <div class="itinerary-item">
-                      <div class="item-time">9:00 AM</div>
-                      <div class="item-dot"></div>
-                      <div class="item-content">
-                        <h5>Gateway of India</h5>
-                        <p>Begin your Mumbai journey at this iconic monument. Take photos and enjoy the sea view.</p>
-                      </div>
-                    </div>
-                    <div class="itinerary-item">
-                      <div class="item-time">11:00 AM</div>
-                      <div class="item-dot"></div>
-                      <div class="item-content">
-                        <h5>Colaba Causeway</h5>
-                        <p>Explore the bustling market street with shops selling clothing, jewelry, and souvenirs.</p>
-                      </div>
-                    </div>
-                    <div class="itinerary-item">
-                      <div class="item-time">1:00 PM</div>
-                      <div class="item-dot"></div>
-                      <div class="item-content">
-                        <h5>Lunch at Leopold Cafe</h5>
-                        <p>Enjoy lunch at this historic cafe offering a mix of Indian and international cuisine.</p>
-                      </div>
-                    </div>
-                    <div class="itinerary-item">
-                      <div class="item-time">3:00 PM</div>
-                      <div class="item-dot"></div>
-                      <div class="item-content">
-                        <h5>Marine Drive</h5>
-                        <p>Visit the iconic promenade along the Arabian Sea, perfect for an evening stroll.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="itinerary-day">
-                  <div class="day-header">
-                    <h4>Day 2: Bandra & Juhu</h4>
-                    <span class="day-date">Suggested: 7 hours</span>
-                  </div>
-                  <div class="itinerary-items">
-                    <div class="itinerary-item">
-                      <div class="item-time">10:00 AM</div>
-                      <div class="item-dot"></div>
-                      <div class="item-content">
-                        <h5>Bandra Fort</h5>
-                        <p>Visit this historic fort offering panoramic views of the Bandra-Worli Sea Link.</p>
-                      </div>
-                    </div>
-                    <div class="itinerary-item">
-                      <div class="item-time">12:30 PM</div>
-                      <div class="item-dot"></div>
-                      <div class="item-content">
-                        <h5>Lunch at Pali Village Cafe</h5>
-                        <p>Enjoy European cuisine in this charming restaurant with rustic ambiance.</p>
-                      </div>
-                    </div>
-                    <div class="itinerary-item">
-                      <div class="item-time">2:30 PM</div>
-                      <div class="item-dot"></div>
-                      <div class="item-content">
-                        <h5>Shopping at Linking Road</h5>
-                        <p>Explore the popular shopping street with both branded stores and street vendors.</p>
-                      </div>
-                    </div>
-                    <div class="itinerary-item">
-                      <div class="item-time">5:00 PM</div>
-                      <div class="item-dot"></div>
-                      <div class="item-content">
-                        <h5>Juhu Beach Sunset</h5>
-                        <p>End your day watching the sunset at Juhu Beach while enjoying local street food.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="itinerary-day">
-                  <div class="day-header">
-                    <h4>Day 3: Cultural Immersion</h4>
-                    <span class="day-date">Suggested: 5 hours</span>
-                  </div>
-                  <div class="itinerary-items">
-                    <div class="itinerary-item">
-                      <div class="item-time">9:30 AM</div>
-                      <div class="item-dot"></div>
-                      <div class="item-content">
-                        <h5>Elephanta Caves</h5>
-                        <p>Take a ferry from Gateway of India to these ancient cave temples.</p>
-                      </div>
-                    </div>
-                    <div class="itinerary-item">
-                      <div class="item-time">1:30 PM</div>
-                      <div class="item-dot"></div>
-                      <div class="item-content">
-                        <h5>Lunch at Trishna</h5>
-                        <p>Try Mumbai's famous seafood at this renowned restaurant in Fort area.</p>
-                      </div>
-                    </div>
-                    <div class="itinerary-item">
-                      <div class="item-time">3:30 PM</div>
-                      <div class="item-dot"></div>
-                      <div class="item-content">
-                        <h5>Chhatrapati Shivaji Terminus</h5>
-                        <p>Visit this UNESCO World Heritage Site and marvel at its Victorian Gothic architecture.</p>
-                      </div>
-                    </div>
-                  </div>
+                <div class="message-bubble">
+                  <div class="message-content">Hello! I'm your Mumbai Travel Assistant. How can I help you plan your Mumbai adventure today?</div>
+                  <span class="timestamp">Just now</span>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-
-        <!-- Travel Resources Tab -->
-        <div id="resources" class="tab-content">
-          <div class="dashboard-header">
-            <h2>Mumbai Travel Resources</h2>
-            <p class="dashboard-subtitle">Essential information for your visit</p>
-          </div>
-          
-          <div class="resources-grid">
-            <div class="resource-card">
-              <div class="resource-icon">
-                <i class="fas fa-subway"></i>
-              </div>
-              <h3>Local Transport Guide</h3>
-              <div class="resource-content">
-                <h4>Mumbai Local Trains</h4>
-                <p>The lifeline of Mumbai, local trains are the fastest way to travel. First class and women-only compartments available.</p>
-                <h4>Auto Rickshaws</h4>
-                <p>Available in suburbs (not in South Mumbai). Always ensure the meter is running.</p>
-                <h4>Taxis</h4>
-                <p>Black and yellow taxis in South Mumbai, app-based services like Uber/Ola throughout the city.</p>
-                <h4>Mumbai Metro</h4>
-                <p>Clean and fast option for specific routes. Purchase tokens or smart cards at stations.</p>
-                <h4>BEST Buses</h4>
-                <p>Extensive network covering most parts of the city. Slower but cheaper option.</p>
-              </div>
-            </div>
-            
-            <div class="resource-card">
-              <div class="resource-icon">
-                <i class="fas fa-rupee-sign"></i>
-              </div>
-              <h3>Currency & Payments</h3>
-              <div class="resource-content">
-                <h4>Currency</h4>
-                <p>Indian Rupee (₹). ATMs widely available. Notify your bank before traveling.</p>
-                <h4>Digital Payments</h4>
-                <p>UPI payments popular for small vendors (requires Indian phone number). Credit cards accepted at most established businesses.</p>
-                <h4>Tipping</h4>
-                <p>10-15% at restaurants if service charge isn't included. ₹20-50 for hotel porters and other services.</p>
-                <h4>Money Exchange</h4>
-                <p>Available at airports, hotels, and authorized vendors. Compare rates before exchanging.</p>
-              </div>
-            </div>
-            
-            <div class="resource-card">
-              <div class="resource-icon">
-                <i class="fas fa-phone-alt"></i>
-              </div>
-              <h3>Emergency Contacts</h3>
-              <div class="resource-content">
-                <h4>Police Emergency</h4>
-                <p>100</p>
-                <h4>Medical Emergency/Ambulance</h4>
-                <p>108</p>
-                <h4>Tourist Police</h4>
-                <p>1800-22-1090</p>
-                <h4>Women's Helpline</h4>
-                <p>1091</p>
-                <h4>Recommended Hospitals</h4>
-                <p>Breach Candy Hospital: 022-2366-7888<br>Lilavati Hospital: 022-2675-1000</p>
-              </div>
-            </div>
-            
-            <div class="resource-card">
-              <div class="resource-icon">
-                <i class="fas fa-hands"></i>
-              </div>
-              <h3>Cultural Etiquette</h3>
-              <div class="resource-content">
-                <h4>Greetings</h4>
-                <p>Traditional "Namaste" (folded hands) or handshakes are common. Remove shoes before entering temples or homes.</p>
-                <h4>Dress Code</h4>
-                <p>Modest clothing recommended, especially at religious sites. Cover shoulders and knees at temples.</p>
-                <h4>Food Etiquette</h4>
-                <p>Eating with right hand is traditional. Try local cuisine but be cautious with street food and water.</p>
-                <h4>Gestures</h4>
-                <p>Head wobble may indicate agreement. Pointing with feet is considered disrespectful.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Photo Gallery Tab -->
-        <div id="gallery" class="tab-content">
-          <div class="dashboard-header">
-            <h2>Mumbai Photo Gallery</h2>
-            <p class="dashboard-subtitle">Visual journey through the city of dreams</p>
-          </div>
-          
-          <div class="gallery-categories">
-            <button class="gallery-category active" data-category="all">All Photos</button>
-            <button class="gallery-category" data-category="landmarks">Landmarks</button>
-            <button class="gallery-category" data-category="culture">Culture</button>
-            <button class="gallery-category" data-category="food">Food</button>
-            <button class="gallery-category" data-category="beaches">Beaches</button>
-          </div>
-          
-          <div class="gallery-upload">
-            <button class="upload-btn"><i class="fas fa-cloud-upload-alt"></i> Submit Your Photo</button>
-          </div>
-          
-          <div class="photo-gallery">
-            <div class="gallery-item" data-category="landmarks">
-              <img src="/static/img/gallery/gateway.jpg" alt="Gateway of India">
-              <div class="gallery-overlay">
-                <h4>Gateway of India</h4>
-                <p>South Mumbai</p>
-              </div>
-            </div>
-            <div class="gallery-item" data-category="landmarks">
-              <img src="/static/img/gallery/marine-drive.jpg" alt="Marine Drive">
-              <div class="gallery-overlay">
-                <h4>Marine Drive</h4>
-                <p>The Queen's Necklace</p>
-              </div>
-            </div>
-            <div class="gallery-item" data-category="landmarks">
-              <img src="/static/img/gallery/cst.jpg" alt="CST Station">
-              <div class="gallery-overlay">
-                <h4>CST Railway Station</h4>
-                <p>UNESCO World Heritage Site</p>
-              </div>
-            </div>
-            <div class="gallery-item" data-category="beaches">
-              <img src="/static/img/gallery/juhu-beach.jpg" alt="Juhu Beach">
-              <div class="gallery-overlay">
-                <h4>Juhu Beach</h4>
-                <p>Sunset at Mumbai's famous beach</p>
-              </div>
-            </div>
-            <div class="gallery-item" data-category="landmarks">
-              <img src="/static/img/gallery/bandra-worli.jpg" alt="Bandra-Worli Sea Link">
-              <div class="gallery-overlay">
-                <h4>Bandra-Worli Sea Link</h4>
-                <p>Iconic bridge connecting the suburbs</p>
-              </div>
-            </div>
-            <div class="gallery-item" data-category="culture">
-              <img src="/static/img/gallery/dhobi-ghat.jpg" alt="Dhobi Ghat">
-              <div class="gallery-overlay">
-                <h4>Dhobi Ghat</h4>
-                <p>World's largest open-air laundry</p>
-              </div>
-            </div>
-            <div class="gallery-item" data-category="food">
-              <img src="/static/img/gallery/street-food.jpg" alt="Mumbai Street Food">
-              <div class="gallery-overlay">
-                <h4>Street Food</h4>
-                <p>Pav Bhaji at Juhu Beach</p>
-              </div>
-            </div>
-            <div class="gallery-item" data-category="landmarks">
-              <img src="/static/img/gallery/elephanta.jpg" alt="Elephanta Caves">
-              <div class="gallery-overlay">
-                <h4>Elephanta Caves</h4>
-                <p>Ancient cave temples</p>
-              </div>
-            </div>
-            <div class="gallery-item" data-category="culture">
-              <img src="/static/img/gallery/ganesh-festival.jpg" alt="Ganesh Festival">
-              <div class="gallery-overlay">
-                <h4>Ganesh Festival</h4>
-                <p>Celebration at Girgaum Chowpatty</p>
-              </div>
-            </div>
-            <div class="gallery-item" data-category="food">
-              <img src="/static/img/gallery/vada-pav.jpg" alt="Vada Pav">
-              <div class="gallery-overlay">
-                <h4>Vada Pav</h4>
-                <p>Mumbai's favorite street food</p>
-              </div>
-            </div>
-            <div class="gallery-item" data-category="beaches">
-              <img src="/static/img/gallery/versova.jpg" alt="Versova Beach">
-              <div class="gallery-overlay">
-                <h4>Versova Beach</h4>
-                <p>Sunset view from Andheri</p>
-              </div>
-            </div>
-            <div class="gallery-item" data-category="landmarks">
-              <img src="/static/img/gallery/taj-hotel.jpg" alt="Taj Mahal Palace Hotel">
-              <div class="gallery-overlay">
-                <h4>Taj Mahal Palace Hotel</h4>
-                <p>Luxury landmark in Colaba</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- User Profile Tab -->
-        <div id="profile" class="tab-content">
-          <div class="dashboard-header">
-            <h2>Your Travel Profile</h2>
-            <p class="dashboard-subtitle">Personalize your Mumbai experience</p>
-          </div>
-          
-          <div class="profile-container">
-            <div class="profile-sidebar">
-              <div class="profile-photo">
-                <div class="profile-image-container">
-                  <img class="profile-image" src="/static/img/default-avatar.jpg" alt="Profile Photo">
-                  <span class="profile-image profile-initials"></span>
-                </div>
-                <input type="file" id="profile-image-upload" style="display: none">
-                <label for="profile-image-upload" class="edit-photo-btn"><i class="fas fa-camera"></i></label>
-              </div>
-              <div class="profile-info">
-                <h3 class="profile-name">User</h3>
-                <p class="profile-email">user@example.com</p>
-                <p class="profile-member member-since">Member since: March 2023</p>
-              </div>
-              <div class="profile-stats">
-                <div class="stat-item">
-                  <span class="stat-value">4</span>
-                  <span class="stat-label">Trips Planned</span>
-                </div>
-                <div class="stat-item">
-                  <span class="stat-value">12</span>
-                  <span class="stat-label">Places Saved</span>
-                </div>
-                <div class="stat-item">
-                  <span class="stat-value">8</span>
-                  <span class="stat-label">Reviews</span>
-                </div>
-              </div>
-              <div class="profile-navigation">
-                <button class="active">Profile</button>
-                <button>Preferences</button>
-                <button>Saved Places</button>
-                <button>Reviews</button>
-                <button id="account-settings-btn">Account Settings</button>
-              </div>
-            </div>
-            
-            <div class="profile-main">
-              <div class="profile-section profile-settings" style="display: none;">
-                <div class="section-header">
-                  <h3>Account Settings</h3>
-                </div>
-                <form id="profile-update-form">
-                  <div class="form-group">
-                    <label for="name">Full Name</label>
-                    <input type="text" id="name" name="name" class="form-control">
-                  </div>
-                  <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" class="form-control">
-                  </div>
-                  <button type="submit" class="btn btn-primary">Update Profile</button>
-                </form>
-                
-                <div class="setting-group">
-                  <h4>Password</h4>
-                  <button class="btn btn-outline">Change Password</button>
-                </div>
-                
-                <div class="setting-group">
-                  <h4>Email Notifications</h4>
-                  <div class="switch-toggle">
-                    <input type="checkbox" id="email-updates" checked>
-                    <label for="email-updates">Travel Updates</label>
-                  </div>
-                  <div class="switch-toggle">
-                    <input type="checkbox" id="email-deals" checked>
-                    <label for="email-deals">Deals & Promotions</label>
-                  </div>
-                  <div class="switch-toggle">
-                    <input type="checkbox" id="email-system">
-                    <label for="email-system">System Notifications</label>
-                  </div>
-                </div>
-
-                <div class="setting-group">
-                  <h4>Account</h4>
-                  <button id="profile-logout-btn" class="btn btn-danger">
-                    <i class="fas fa-sign-out-alt"></i> Logout
+            <form id="chat-form" class="chat-footer">
+              <div class="chat-input-wrapper">
+                <textarea id="input-message" class="chat-input" placeholder="Type your message here..." rows="1"></textarea>
+                <div class="input-actions">
+                  <button type="button" class="input-action-btn" title="Attach files">
+                    <i class="fas fa-paperclip"></i>
+                  </button>
+                  <button type="button" class="input-action-btn" title="Voice input">
+                    <i class="fas fa-microphone"></i>
                   </button>
                 </div>
               </div>
-              
-              <div class="profile-section preferences-section">
-                <div class="section-header">
-                  <h3>Travel Preferences</h3>
-                  <button class="edit-btn"><i class="fas fa-pencil-alt"></i> Edit</button>
+              <button type="submit" id="send-button" class="send-btn">
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+        
+        <!-- Map Tab -->
+        <div id="map" class="tab-container">
+          <div class="map-container">
+            <div id="map-canvas"></div>
+            <div class="map-controls">
+              <button class="map-control-btn" id="zoom-in">
+                <i class="fas fa-plus"></i>
+              </button>
+              <button class="map-control-btn" id="zoom-out">
+                <i class="fas fa-minus"></i>
+              </button>
+              <button class="map-control-btn" id="current-location">
+                <i class="fas fa-location-arrow"></i>
+              </button>
+            </div>
+          </div>
+          </div>
+
+        <!-- Trip Tab -->
+        <div id="trip" class="tab-container">
+          <div class="dashboard-header">
+            <h2>My Trip Planner</h2>
+          </div>
+
+          <div class="itinerary-container">
+            <div class="day-tabs">
+              <button class="day-tab active">Day 1</button>
+              <button class="day-tab">Day 2</button>
+              <button class="day-tab">Day 3</button>
+              <button class="day-tab">+ Add Day</button>
+            </div>
+            
+            <div class="itinerary-day active">
+              <div class="timeline">
+                <div class="timeline-item">
+                  <div class="timeline-time">09:00 AM</div>
+                  <div class="timeline-card">
+                    <h4>Visit Gateway of India</h4>
+                    <p>Start your day at this iconic monument in Colaba</p>
+                  </div>
                 </div>
-                <div class="preferences-grid">
-                  <div class="preference-item">
-                    <h4>Interests</h4>
-                    <div class="tags">
-                      <span class="tag">Beaches</span>
-                      <span class="tag">Food Tours</span>
-                      <span class="tag">Photography</span>
-                      <span class="tag">Architecture</span>
-                    </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">12:00 PM</div>
+                  <div class="timeline-card">
+                    <h4>Lunch at Leopold Cafe</h4>
+                    <p>Enjoy a meal at this historic restaurant</p>
                   </div>
-                  <div class="preference-item">
-                    <h4>Cuisine</h4>
-                    <div class="tags">
-                      <span class="tag">Street Food</span>
-                      <span class="tag">Seafood</span>
-                      <span class="tag">Vegetarian</span>
-                    </div>
-                  </div>
-                  <div class="preference-item">
-                    <h4>Accommodation</h4>
-                    <div class="tags">
-                      <span class="tag">Mid-range</span>
-                      <span class="tag">Boutique</span>
-                    </div>
-                  </div>
-                  <div class="preference-item">
-                    <h4>Travel Style</h4>
-                    <div class="tags">
-                      <span class="tag">Cultural</span>
-                      <span class="tag">Photography</span>
-                      <span class="tag">Food</span>
-                    </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">03:00 PM</div>
+                  <div class="timeline-card">
+                    <h4>Shopping at Colaba Causeway</h4>
+                    <p>Browse the market for souvenirs and local items</p>
                   </div>
                 </div>
               </div>
               
-              <div class="profile-section">
-                <div class="section-header">
-                  <h3>Recent Activity</h3>
+              <div class="add-activity">
+                <input type="text" placeholder="Add a new activity...">
+                <button class="btn-primary">Add</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="saved-places-section mt-20">
+            <h3>My Saved Places</h3>
+            <div id="saved-places" class="saved-places">
+              <!-- Saved places will be populated here -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Profile Tab -->
+        <div id="profile" class="tab-container">
+          <div class="profile-container">
+            <div class="profile-sidebar">
+              <div class="profile-avatar-container">
+                <i class="fas fa-user-circle profile-icon"></i>
+              </div>
+              <div class="profile-info">
+                <h2>Guest User</h2>
+                <p class="profile-email">guest@example.com</p>
+              </div>
+              
+              <div class="profile-stats">
+                <div class="stat-item">
+                  <div class="stat-value">7</div>
+                  <div class="stat-label">Saved Places</div>
                 </div>
-                <div class="activity-timeline">
-                  <div class="activity-item">
-                    <div class="activity-icon"><i class="fas fa-heart"></i></div>
-                    <div class="activity-content">
-                      <p>You saved <strong>Leopold Cafe</strong> to your favorites</p>
-                      <span class="activity-time">2 days ago</span>
-                    </div>
-                  </div>
-                  <div class="activity-item">
-                    <div class="activity-icon"><i class="fas fa-star"></i></div>
-                    <div class="activity-content">
-                      <p>You reviewed <strong>Gateway of India</strong></p>
-                      <span class="activity-time">1 week ago</span>
-                    </div>
-                  </div>
-                  <div class="activity-item">
-                    <div class="activity-icon"><i class="fas fa-map-marked-alt"></i></div>
-                    <div class="activity-content">
-                      <p>You created a new itinerary: <strong>Mumbai Highlights (3 Days)</strong></p>
-                      <span class="activity-time">2 weeks ago</span>
-                    </div>
-                  </div>
-                  <div class="activity-item">
-                    <div class="activity-icon"><i class="fas fa-comment"></i></div>
-                    <div class="activity-content">
-                      <p>You asked about <strong>best time to visit Juhu Beach</strong></p>
-                      <span class="activity-time">3 weeks ago</span>
-                    </div>
-                  </div>
+                <div class="stat-item">
+                  <div class="stat-value">3</div>
+                  <div class="stat-label">Days Planned</div>
                 </div>
+              </div>
+              
+              <button class="edit-profile-btn">Edit Profile</button>
+            </div>
+            
+            <div class="profile-content">
+              <div class="profile-tabs">
+                <div class="profile-tab active" data-tab="saved">Saved Places</div>
+                <div class="profile-tab" data-tab="preferences">Preferences</div>
+                <div class="profile-tab" data-tab="account">Account Settings</div>
+              </div>
+              
+              <div id="saved-tab" class="profile-tab-content active">
+                <h3>Your Saved Places</h3>
+                <div class="saved-places">
+                  <!-- Saved places will be populated here -->
+                </div>
+              </div>
+              
+              <div id="preferences-tab" class="profile-tab-content">
+                <h3>Travel Preferences</h3>
+                <!-- Preferences form would go here -->
+        </div>
+
+              <div id="account-tab" class="profile-tab-content">
+                <h3>Account Settings</h3>
+                <!-- Account settings form would go here -->
               </div>
             </div>
           </div>
@@ -1465,175 +747,49 @@
       </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="site-footer">
-      <div class="footer-container">
-        <div class="footer-section">
-          <h3>WeTravel Mumbai</h3>
-          <p>Your intelligent companion for exploring Mumbai, India's city of dreams.</p>
-          <div class="social-icons">
-            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
-          </div>
-        </div>
-        
-        <div class="footer-section">
-          <h3>Quick Links</h3>
-          <ul class="footer-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#subplaces">Neighborhoods</a></li>
-            <li><a href="#itinerary">Itinerary Planner</a></li>
-            <li><a href="#location">Interactive Map</a></li>
-          </ul>
-        </div>
-        
-        <div class="footer-section">
-          <h3>Resources</h3>
-          <ul class="footer-links">
-            <li><a href="#resources">Travel Guide</a></li>
-            <li><a href="#gallery">Photo Gallery</a></li>
-            <li><a href="#" class="modal-trigger" data-modal="about-modal">About Us</a></li>
-            <li><a href="#" class="modal-trigger" data-modal="contact-modal">Contact</a></li>
-          </ul>
-        </div>
-        
-        <div class="footer-section">
-          <h3>Subscribe</h3>
-          <p>Get the latest travel updates and offers</p>
-          <form class="footer-subscribe">
-            <input type="email" placeholder="Your email address" aria-label="Email address">
-            <button type="submit">Subscribe</button>
-          </form>
-        </div>
-      </div>
-      
-      <div class="footer-bottom">
-        <div class="footer-bottom-content">
-          <p>&copy; 2023 WeTravel Mumbai. All rights reserved.</p>
-          <ul class="legal-links">
-            <li><a href="#" class="modal-trigger" data-modal="privacy-modal">Privacy Policy</a></li>
-            <li><a href="#" class="modal-trigger" data-modal="terms-modal">Terms of Service</a></li>
-            <li><a href="#" class="modal-trigger" data-modal="faq-modal">FAQs</a></li>
-          </ul>
-        </div>
-      </div>
-    </footer>
+    <!-- Notification -->
+    <div class="notification notification-success">
+      <div class="notification-icon"><i class="fas fa-check"></i></div>
+      <div class="notification-message">Place added to your saved list!</div>
+      <button class="notification-close"><i class="fas fa-times"></i></button>
+    </div>
     
-    <!-- Modals -->
-    <div class="modal" id="about-modal">
-      <div class="modal-content">
-        <button class="modal-close">&times;</button>
-        <h2>About WeTravel Mumbai</h2>
-        <p>WeTravel Mumbai is an AI-powered travel assistance platform focused on enhancing visitor experiences in Mumbai, India. Our mission is to provide personalized, accurate, and culturally nuanced travel information to help travelers discover the authentic Mumbai.</p>
-        <p>Founded in 2023, our team combines expertise in technology, travel, and local knowledge to create a comprehensive resource for exploring the city of dreams.</p>
+    <!-- Modal -->
+    <div class="modal-overlay">
+      <div class="modal">
+        <div class="modal-header">
+          <h3 class="modal-title">Place Details</h3>
+          <button class="modal-close"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="modal-body">
+          <!-- Modal content will be dynamically inserted -->
+        </div>
+        <div class="modal-footer">
+          <button class="modal-btn btn-secondary">Close</button>
+          <button class="modal-btn btn-primary">Save to Trip</button>
+        </div>
       </div>
     </div>
     
-    <div class="modal" id="contact-modal">
-      <div class="modal-content">
-        <button class="modal-close">&times;</button>
-        <h2>Contact Us</h2>
-        <form class="contact-form">
-          <div class="form-group">
-            <label for="contact-name">Name</label>
-            <input type="text" id="contact-name" required>
-          </div>
-          <div class="form-group">
-            <label for="contact-email">Email</label>
-            <input type="email" id="contact-email" required>
-          </div>
-          <div class="form-group">
-            <label for="contact-subject">Subject</label>
-            <input type="text" id="contact-subject" required>
-          </div>
-          <div class="form-group">
-            <label for="contact-message">Message</label>
-            <textarea id="contact-message" rows="5" required></textarea>
-          </div>
-          <button type="submit" class="btn-primary">Send Message</button>
-        </form>
-      </div>
+    <!-- Toast Notification -->
+    <div class="toast toast-success">
+      <i class="fas fa-check-circle toast-icon"></i>
+      <span class="toast-message">Successfully updated!</span>
     </div>
-
-    <!-- Place Detail Modal -->
-    <div id="place-modal" class="place-modal">
-      <div class="place-modal-content">
-        <span class="close-modal">&times;</span>
-        <div class="place-modal-header">
-          <div class="place-image-container">
-            <img id="modal-place-image" src="" alt="Place Image">
-            <span id="modal-place-category" class="place-category-badge"></span>
-          </div>
-          <div class="place-header-info">
-            <h2 id="modal-place-title"></h2>
-            <p id="modal-place-neighborhood"></p>
-            <p id="modal-place-address"></p>
-          </div>
-        </div>
-        <div class="place-modal-body">
-          <div class="place-description">
-            <h3>About</h3>
-            <p id="modal-place-description"></p>
-          </div>
-          <div class="place-map">
-            <h3>Location</h3>
-            <div id="modal-place-map" class="map-container">
-              <!-- Map will be embedded here -->
-              <img id="modal-map-preview" src="" alt="Map Preview">
-            </div>
-          </div>
-          <div class="place-actions">
-            <button id="start-chat-btn" class="primary-btn">
-              <i class="fas fa-comment-alt"></i> Start Chat for this Place
-            </button>
-            <button id="nearby-recommendations-btn" class="secondary-btn">
-              <i class="fas fa-map-marker-alt"></i> Nearby Recommendations
-            </button>
-            <button id="save-to-trip-btn" class="outline-btn">
-              <i class="fas fa-bookmark"></i> Save to My Trip
-            </button>
-          </div>
-        </div>
-      </div>
+    
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" style="display: none;">
+      <div class="loader"></div>
+      <p class="loading-text">Loading, please wait...</p>
     </div>
-
-    <!-- Add a neighborhood filter system at the top of the main content area -->
-    <div class="neighborhood-filters">
-      <div class="filter-tabs">
-        <div class="filter-tab active" data-filter="all">All Neighborhoods</div>
-        <div class="filter-tab" data-filter="colaba">Colaba</div>
-        <div class="filter-tab" data-filter="bandra">Bandra</div>
-        <div class="filter-tab" data-filter="juhu">Juhu</div>
-        <div class="filter-tab" data-filter="andheri">Andheri</div>
-        <div class="filter-tab" data-filter="dadar">Dadar</div>
-        <div class="filter-tab" data-filter="lowerparel">Lower Parel</div>
-        <div class="filter-tab" data-filter="santacruz">Santacruz</div>
-        <div class="filter-tab" data-filter="goregaon">Goregaon</div>
-        <div class="filter-tab" data-filter="chembur">Chembur</div>
-        <div class="filter-tab" data-filter="powai">Powai</div>
-      </div>
-      <div class="category-filters">
-        <div class="category-filter active" data-category="all">
-          <i class="fas fa-th-large"></i> All
-        </div>
-        <div class="category-filter" data-category="eat">
-          <i class="fas fa-utensils"></i> Eat
-        </div>
-        <div class="category-filter" data-category="see">
-          <i class="fas fa-camera"></i> See
-        </div>
-        <div class="category-filter" data-category="tip">
-          <i class="fas fa-map-pin"></i> Tips
-        </div>
-      </div>
-    </div>
-
+    
     <!-- JavaScript -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&callback=initMap&libraries=places" async defer></script>
     <script src="/static/js/main.js"></script>
     <script src="/static/js/maps.js"></script>
     <script src="/static/js/enhanced-ui.js"></script>
     <script src="/static/js/profile.js"></script>
   </body>
 </html>
+
+<script src="/static/js/button-fix.js"></script>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bandra - WeTravel Mumbai</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="colaba-header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <img src="img/logo.svg" alt="WeTravel Logo">
+                </a>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="index.html#neighborhoods">Neighborhoods</a>
+                    <a href="index.html#map">Map</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="colaba-content">
+        <section class="hero-section">
+            <div class="container">
+                <h1>Explore Bandra</h1>
+                <p>Mumbai's hip and trendy suburb with a perfect blend of history, luxury, and coastal charm.</p>
+            </div>
+        </section>
+
+        <section class="neighborhood-details">
+            <div class="container">
+                <div class="two-column-layout">
+                    <div class="main-content">
+                        <h2>About Bandra</h2>
+                        <p>
+                            Bandra is a coastal suburb located in the western part of Mumbai, known for its posh residential 
+                            areas, trendy restaurants, and lively nightlife. It's often called the "Queen of the Suburbs" and 
+                            is a perfect blend of old-world charm and modern amenities.
+                        </p>
+                        
+                        <div class="image-gallery">
+                            <img src="img/Bandstand.JPG" alt="Bandstand Promenade" class="feature-image">
+                            <div class="image-caption">The famous Bandstand Promenade in Bandra with stunning sea views</div>
+                        </div>
+                        
+                        <h3>History</h3>
+                        <p>
+                            Bandra's history dates back to the 16th century when it was a small fishing village. During the 
+                            Portuguese rule, it became a significant settlement with many churches. After the British took 
+                            over, it developed as a prominent suburb. Today, it's one of Mumbai's most desirable neighborhoods.
+                        </p>
+                        
+                        <h2 id="see">What to See</h2>
+                        <div class="attractions-list">
+                            <div class="attraction-card">
+                                <h3>Bandra-Worli Sea Link</h3>
+                                <p>
+                                    This iconic 5.6 km long bridge connects Bandra and Worli across the Arabian Sea. It's a 
+                                    marvel of modern engineering and offers spectacular views of Mumbai's skyline.
+                                </p>
+                            </div>
+                            
+                            <div class="attraction-card">
+                                <h3>Bandstand Promenade</h3>
+                                <p>
+                                    A popular seaside walkway that offers stunning views of the Arabian Sea. It's famous for 
+                                    celebrity homes, including Bollywood superstar Shah Rukh Khan's residence 'Mannat'.
+                                </p>
+                            </div>
+                            
+                            <div class="attraction-card">
+                                <h3>Mount Mary Church</h3>
+                                <p>
+                                    A historic Roman Catholic church that dates back to the 16th century. The annual Bandra Fair 
+                                    held here in September attracts thousands of devotees from all over.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <h2 id="eat">Where to Eat</h2>
+                        <div class="restaurant-list">
+                            <div class="restaurant-card">
+                                <h3>Pali Village Café</h3>
+                                <p>
+                                    A rustic European-style café with exposed brick walls and vintage décor. Known for its 
+                                    delicious continental cuisine and relaxed ambiance.
+                                </p>
+                            </div>
+                            
+                            <div class="restaurant-card">
+                                <h3>Bastian</h3>
+                                <p>
+                                    A popular seafood restaurant frequented by Bollywood celebrities. Known for its fresh 
+                                    seafood, creative dishes, and vibrant atmosphere.
+                                </p>
+                            </div>
+                            
+                            <div class="restaurant-card">
+                                <h3>Candies</h3>
+                                <p>
+                                    A Bandra institution known for its eclectic décor and diverse menu. Perfect for breakfast 
+                                    or brunch, serving everything from sandwiches and salads to cakes and pastries.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <h2 id="tips">Local Tips</h2>
+                        <ul class="tips-list">
+                            <li>Visit Bandstand during sunset for the most beautiful views of the Arabian Sea.</li>
+                            <li>Explore the street art in Bandra, which is known for its vibrant murals and graffiti.</li>
+                            <li>Shop at Linking Road or Hill Road for great fashion finds at affordable prices.</li>
+                            <li>Try the East Indian cuisine, which is native to this area and has Portuguese influences.</li>
+                            <li>Visit during the Bandra Fair in September to experience the local culture and festivities.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="sidebar">
+                        <div class="info-box">
+                            <h3>Getting There</h3>
+                            <p><i class="fas fa-train"></i> Bandra Station (Western Line) - 5 min walk</p>
+                            <p><i class="fas fa-train"></i> Bandra Terminus - 15 min drive</p>
+                            <p><i class="fas fa-bus"></i> Multiple BEST bus routes available</p>
+                        </div>
+                        
+                        <div class="info-box">
+                            <h3>Best Time to Visit</h3>
+                            <p>October to March (Winter season)</p>
+                            <p>Evenings are best for Bandstand</p>
+                        </div>
+                        
+                        <div class="map-container">
+                            <h3>Location</h3>
+                            <div id="bandra-map" class="map"></div>
+                        </div>
+                        
+                        <div class="save-to-trip">
+                            <button id="save-bandra-btn" class="btn primary-btn">
+                                <i class="fas fa-bookmark"></i> Save to My Trip
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo-section">
+                    <img src="img/logo.svg" alt="WeTravel Logo">
+                    <p>Discover the best of Mumbai with WeTravel</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#neighborhoods">Neighborhoods</a></li>
+                        <li><a href="index.html#map">Map</a></li>
+                        <li><a href="index.html#chat">Ask Assistant</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> info@wetravel.com</p>
+                    <p><i class="fas fa-phone"></i> +91 1234567890</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 WeTravel. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification toast -->
+    <div id="notification-toast" class="notification-toast">
+        <div class="notification-content">
+            <span class="notification-message">Notification message</span>
+            <button class="close-notification"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set up save button
+            const saveButton = document.getElementById('save-bandra-btn');
+            if (saveButton) {
+                saveButton.addEventListener('click', function() {
+                    // Create a place object representing Bandra
+                    const bandraPlace = {
+                        name: 'Bandra',
+                        description: 'Mumbai\'s hip and trendy suburb with a perfect blend of history, luxury, and coastal charm.',
+                        image: 'img/Bandstand.JPG',
+                        type: 'neighborhood'
+                    };
+                    
+                    // Use the saveToTrip function from main.js
+                    if (typeof saveToTrip === 'function') {
+                        saveToTrip(bandraPlace);
+                    } else {
+                        // Fallback if function not available
+                        console.log('Saving Bandra to trip...');
+                        showNotification('Bandra added to your trip!', 'success');
+                    }
+                });
+            }
+            
+            // Initialize notification system
+            function showNotification(message, type = 'info') {
+                const toast = document.getElementById('notification-toast');
+                const messageEl = toast.querySelector('.notification-message');
+                
+                if (toast && messageEl) {
+                    // Remove previous classes
+                    toast.classList.remove('success', 'error', 'info', 'warning');
+                    // Add appropriate class
+                    toast.classList.add(type);
+                    // Set message
+                    messageEl.textContent = message;
+                    // Show toast
+                    toast.classList.add('active');
+                    
+                    // Hide after 3 seconds
+                    setTimeout(() => {
+                        toast.classList.remove('active');
+                    }, 3000);
+                    
+                    // Close button
+                    const closeBtn = toast.querySelector('.close-notification');
+                    if (closeBtn) {
+                        closeBtn.onclick = function() {
+                            toast.classList.remove('active');
+                        };
+                    }
+                }
+            }
+        });
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initBandraMap" async defer></script>
+    <script>
+        // Initialize map
+        function initBandraMap() {
+            const bandraLocation = { lat: 19.0596, lng: 72.8295 };
+            const map = new google.maps.Map(document.getElementById('bandra-map'), {
+                zoom: 15,
+                center: bandraLocation,
+                mapTypeControl: false,
+                fullscreenControl: false,
+                streetViewControl: false
+            });
+            
+            // Add marker for Bandra
+            const marker = new google.maps.Marker({
+                position: bandraLocation,
+                map: map,
+                title: 'Bandra'
+            });
+        }
+    </script>
+</body>
+</html>
