@@ -57,4 +57,4 @@ class ChromaStore:
 
         except Exception as e:
             print(f"Error during query: {e}")
-            return []
+            return {"documents": []}
